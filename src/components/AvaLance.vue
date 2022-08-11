@@ -72,7 +72,7 @@ const fetchData = async (pos: any) => {
   </div>
 </template>
 
-<style>
+<style scoped>
 .widget {
   padding-top: 19%;
 }
@@ -82,7 +82,7 @@ const fetchData = async (pos: any) => {
   color:#777
 }
 .cards {
-  background: #f0f0f0;
+ background-color:#343436;
   width: 100%;
 max-width: 92vw;
   height:100%;

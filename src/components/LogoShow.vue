@@ -4,18 +4,26 @@
       <div class="col">
         <img class="logo" src="../assets/logofriliv.png" />
       </div>
+      
+     <icon-nav/>
     </div>
+
+    
   </div>
+
+  
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import IconNav from "./IconNav.vue";
 
 export default defineComponent({
-  name: "HelloWorld",
-  props: {
-    msg: String,
-  },
+    name: "HelloWorld",
+    props: {
+        msg: String,
+    },
+    components: { IconNav }
 });
 </script>
 

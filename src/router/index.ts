@@ -16,32 +16,31 @@ const routes: Array<any> = [
   {
     path: "/sea",
     name: "sea",
-    meta: { transition: "fade", mode: "out-in" },
+   
     component: SeaView,
   },
   {
     path: "/mountain",
     name: "mountain",
-    meta: { transition: "fade", mode: "out-in" },
+  
     component: MountainView,
   },
 
   {
     path: "/weather",
     name: "weather",
-    meta: { transition: "fade", mode: "out-in" },
+  
     component: WeatherViewVue,
   },
   {
     path: "/travel",
     name: "travel",
-    meta: { transition: "fade", mode: "out-in" },
     component: TravelViewVue,
   },
   {
     path: "/map",
     name: "map",
-    meta: { transition: "fade", mode: "out-in" },
+    
     component: MapViewVue,
   },
 ];

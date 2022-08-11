@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { usePositionStore } from "@/stores/position";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useQuasar, useDialogPluginComponent } from "quasar";
 let searchInput = ref("");
 const places = ref();
@@ -51,6 +51,10 @@ const setLocation = (place: any) => {
 function onOkClick() {
   onDialogOK();
 }
+
+
+
+
 </script>
 
 <template>
@@ -88,9 +92,9 @@ function onOkClick() {
               bordered
               separator
             >
-              <q-item clickable @click="setLocation(place)">
-                <q-item-section>
-                  <q-item-label>{{ place.skrivemåte }}</q-item-label>
+              <q-item class="text-secondary" clickable @click="setLocation(place)">
+                <q-item-section >
+                  <q-item-label >{{ place.skrivemåte }}</q-item-label>
                   <q-item-label caption>
                     <div>
                       {{ place.navneobjekttype }}

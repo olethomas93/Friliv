@@ -8,7 +8,7 @@ const store = usePositionStore();
 
 <template>
 <div class="text">
-<q-icon name="pin_drop"  color="white"/>
+<q-icon name="pin_drop"  color="secondary"/>
 
 
 {{store.place}}
@@ -19,6 +19,6 @@ const store = usePositionStore();
 <style>
 
 .text{
-    color:#ffffff ;
+    color:"secondary" ;
 }
 </style>
