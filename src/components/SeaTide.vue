@@ -95,7 +95,7 @@ const locateMe = async () => {
           <div class="content">
             <img src="../assets/tide.svg" style="width: 30%" />
             <div
-              class=" text-white"
+             
              
               v-if="currentLevel"
             >
@@ -111,7 +111,7 @@ const locateMe = async () => {
 
           <div class="content">
             <img src="../assets/tideup.svg" style="width: 30%" />
-            <div class=" text-white" v-if="nextHighTide">
+            <div  v-if="nextHighTide">
               {{ nextHighTide }}
             </div>
           </div>
@@ -127,7 +127,7 @@ const locateMe = async () => {
               style="width: 30%;"
             />
 
-            <div class="text-white" v-if="nextLowTide">
+            <div  v-if="nextLowTide">
               {{ nextLowTide }}
             </div>
           </div>
@@ -143,7 +143,7 @@ const locateMe = async () => {
   width: 100%;
   max-width: 92vw;
   height: 100%;
-background-color:#343436;
+
   
 }
 

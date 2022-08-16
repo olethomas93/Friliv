@@ -26,7 +26,7 @@ import router from '../router/index'
 }
 
 .buttonNav{
-    z-index: 9999999999999;
+
         display: flex;
     flex-direction: row;
     align-items: center;

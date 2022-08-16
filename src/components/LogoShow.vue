@@ -3,9 +3,10 @@
     <div class="row">
       <div class="col">
         <img class="logo" src="../assets/logofriliv.png" />
+        <icon-nav/>
       </div>
       
-     <icon-nav/>
+     
     </div>
 
     
@@ -31,7 +32,7 @@ export default defineComponent({
 <style scoped>
 .logo {
   margin-top: 10%;
-  width: 100%;
+  width: 50%;
 }
 @media only screen and (min-width: 992px) {
 
@@ -55,5 +56,12 @@ li {
 }
 a {
   color: #42b983;
+}
+
+.col{
+  
+    display: flex;
+    justify-content: center;
+
 }
 </style>

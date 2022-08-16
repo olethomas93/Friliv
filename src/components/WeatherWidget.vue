@@ -423,7 +423,7 @@ const locateMe = async () => {
   flex-direction: row;
   align-items: center;
   overflow: auto;
-  color: #ffffff;
+
 
   column-gap: 10%;
 }
@@ -455,7 +455,7 @@ flex-direction: row;
 }
 
 .cards {
-  background: #343436;
+
   width: 100%;
 max-width: 92vw;
   height:100%;

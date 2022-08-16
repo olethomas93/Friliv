@@ -82,7 +82,7 @@ const fetchData = async (pos: any) => {
   color:#777
 }
 .cards {
- background-color:#343436;
+
   width: 100%;
 max-width: 92vw;
   height:100%;
