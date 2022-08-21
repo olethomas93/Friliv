@@ -5,6 +5,12 @@ import MountainView from "@/views/MountainView.vue";
 import MapViewVue from "@/views/MapView.vue";
 import WeatherViewVue from "@/views/WeatherView.vue";
 import TravelViewVue from "@/views/TravelView.vue";
+import TwitterFeedVue from "@/components/TwitterFeed.vue";
+import AvaLanceVue from "@/components/AvaLance.vue";
+import WebCamsVue from "@/components/WebCams.vue";
+import SeaTideVue from "@/components/SeaTide.vue";
+import HuggTabelVue from "@/components/HuggTabel.vue";
+
 const routes: Array<any> = [
   {
     path: "/",
@@ -18,12 +24,36 @@ const routes: Array<any> = [
     name: "sea",
    
     component: SeaView,
+    children:[
+      {
+        name:"tide",
+        path:"tide",
+        component:SeaTideVue
+      },
+      {
+        name:"hugg",
+        path:"hugg",
+        component:HuggTabelVue
+      },
+   
+    ]
   },
   {
     path: "/mountain",
     name: "mountain",
   
     component: MountainView,
+    children:[
+      {name:"Twitter",
+    path:"twitter",
+  component:TwitterFeedVue},
+  {name:"skred",
+  path:"skred",
+component:AvaLanceVue},
+{name:"webcam",
+  path:"webcam",
+component:WebCamsVue}
+    ]
   },
 
   {

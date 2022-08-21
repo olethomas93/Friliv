@@ -30,7 +30,7 @@ const fetchData = async (pos: any) => {
 </script>
 
 <template>
-  <div class="q-pa-md">
+  
     <div class="row q-gutter-md">
       <div
         class="col-12 col-md"
@@ -69,7 +69,7 @@ const fetchData = async (pos: any) => {
         </q-card>
       </div>
     </div>
-  </div>
+
 </template>
 
 <style scoped>

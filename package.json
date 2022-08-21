@@ -15,11 +15,15 @@
     "pinia": "^2.0.13",
     "primevue": "^3.15.0",
     "swiper": "^8.1.5",
+    "twitter-widgets": "^2.0.0",
     "vue": "^3.2.33",
-    "vue-router": "^4.0.14"
+    "vue-router": "^4.0.14",
+    "vue-tweet": "^2.0.2",
+    "vue-twitter": "^0.1.0",
+    "vue-twitter-timeline": "^1.0.1"
   },
   "devDependencies": {
-    "@quasar/extras": "^1.14.0",
+    "@quasar/extras": "^1.15.1",
     "@quasar/vite-plugin": "^1.0.10",
     "@rushstack/eslint-patch": "^1.1.0",
     "@types/node": "^16.11.27",
@@ -30,7 +34,7 @@
     "eslint": "^8.5.0",
     "eslint-plugin-vue": "^8.2.0",
     "prettier": "^2.5.1",
-    "quasar": "^2.7.1",
+    "quasar": "^2.7.7",
     "sass": "^1.32.12",
     "typescript": "~4.6.3",
     "vite": "^2.9.5",

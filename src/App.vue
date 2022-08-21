@@ -28,6 +28,10 @@ onMounted(async ()=>{
 
 <template>
   <div class="">
+
+  <q-layout view="hHh Lpr lff"    class="shadow-2 rounded-borders">
+   
+            <q-header class="bg-white text-secondary">
 <div class="toolbar">
              <q-btn flat @click="drawerLeft = !drawerLeft" round dense icon="menu" color="secondary" />
 
@@ -37,9 +41,7 @@ onMounted(async ()=>{
           
           
         </div>
-  <q-layout view="hHh Lpr lff"    class="shadow-2 rounded-borders">
-   
-        
+        </q-header>
   
       <q-drawer
         v-model="drawerLeft"
@@ -101,13 +103,14 @@ onMounted(async ()=>{
    
 
       <q-page-container>
-        <transition name="fade" mode="out-in">
+       
         <router-view v-slot="{ Component }">
-      
+       <transition name="fade" mode="out-in">
         <component :is="Component" />
-     
+      </transition>
+    
     </router-view>
- </transition>
+
 
     
     
@@ -180,6 +183,21 @@ nav {
 }
 .fade-enter-from,
 .fade-leave-to {
+  opacity: 0;
+}
+
+
+.slide-fade-enter-active {
+  transition: all 1s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
   opacity: 0;
 }
 </style>

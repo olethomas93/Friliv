@@ -41,13 +41,13 @@ onMounted(async () => {
     }
   );
 
-  const Vindkraft = leaflet.tileLayer.wms(
-    "https://nve.geodataonline.no/arcgis/services/Vindkraft2/MapServer/WmsServer?",
+  const marineGrunnkart = leaflet.tileLayer.wms(
+    "https://geo.ngu.no/mapserver/MarineGrunnkartWMS?",
     {
-      layers: "Vindkraft_utbygd",
+      layers: "Dybdeforhold",
       transparent: true,
       format: "image/png",
-      attribution: "NVE",
+      attribution: "kartverket",
     }
   );
 
@@ -76,8 +76,8 @@ onMounted(async () => {
   };
 
   var overlay = {
-    Bratt: bratthet,
-    laksekart: laksekart,
+    Bratthet: bratthet,
+    Dybde:marineGrunnkart
   };
   mymap = leaflet.map("mapid", {
     layers: [norgeskart],
