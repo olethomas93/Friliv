@@ -77,7 +77,7 @@ function onOkClick() {
               <q-icon name="close" size="lg" @click="onDialogCancel"> </q-icon>
             </div>
             <div class="locatebtn">
-            <q-btn @click="setPosition()" style="width: 100%;">
+            <q-btn flat @click="setPosition()" style="width: 100%;">
               
                 <div class="lokasjon">
                   Min lokasjon
@@ -125,6 +125,7 @@ function onOkClick() {
 }
 .searchBar {
   display: flex;
+  padding-top: 4%;
 }
 
 .lokasjon {

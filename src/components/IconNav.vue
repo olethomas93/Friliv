@@ -33,6 +33,7 @@ import router from '../router/index'
     justify-content: center;
     position: absolute;
     top: 80%;
+    width: 100%;
 }
 
 </style>

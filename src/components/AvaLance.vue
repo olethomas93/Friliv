@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, computed } from "vue";
+import { onMounted, ref, computed, reactive } from "vue";
 import { usePositionStore } from "@/stores/position";
 const VARSOM_URL =
   "https://api01.nve.no/hydrology/forecast/avalanche/v6.0.1/api/AvalancheWarningByCoordinates/Detail/";
@@ -8,6 +8,9 @@ const avalanceData = ref();
 const location = ref();
 const errorStr = ref();
 const store = usePositionStore();
+
+const expanded = reactive([false,false,false])
+
 
 
 
@@ -23,7 +26,7 @@ const fetchData = async (pos: any) => {
   const url1 = `${VARSOM_URL}${pos.latitude}/${pos.longitude}/1`;
   avalanceData.value = await (await fetch(url1)).json();
 
-  console.log(avalanceData.value);
+ 
 
   return true;
 };
@@ -31,50 +34,58 @@ const fetchData = async (pos: any) => {
 
 <template>
   
-    <div class="row q-gutter-md">
+    <div class="row">
       <div
-        class="col-12 col-md"
+        class="col-12 col-md-6"
         v-for="(forcast, index) in avalanceData"
         :key="forcast"
       >
         <q-card
           class="cards widget"
-          style="height: 100%"
+          
         >
           <q-card-section>
             <div class="text-h6">{{ forcast.RegionName }}</div>
             <h6 :class="'color' + forcast.DangerLevel" class="badge">
               {{ forcast.DangerLevel }}
             </h6>
-          </q-card-section>
+         
 
-          <!-- <div>
+         
               <h6>{{ forcast.MainText }}</h6>
-              <button
-                class="btn btn-sm btn-outline-info"
-                type="button"
-                data-bs-toggle="collapse"
-                :data-bs-target="'#details' + index"
-                aria-expanded="false"
-                aria-controls="collapseExample"
-              >
-                Detaljer
-              </button>
-              <div class="collapse" :id="'details' + index">
-                <div class="card card-body">
-                  <h6>{{ forcast.AvalancheDanger }}</h6>
-                </div>
-              </div>
-            </div> -->
+             
+        
+            </q-card-section>
+            <q-card-actions>
+               <q-btn
+          color="grey"
+          round
+          flat
+          dense
+          
+          :icon="expanded[index] ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
+          @click="expanded[index] = !expanded[index]"
+        />
+            </q-card-actions>
+
+             <q-slide-transition>
+        <div v-show="expanded[index]">
+          <q-separator />
+          <q-card-section class="text-subitle2">
+           {{ forcast.AvalancheDanger }}
+       
+          </q-card-section>
+        </div>
+      </q-slide-transition>
         </q-card>
       </div>
-    </div>
+   </div>
 
 </template>
 
 <style scoped>
 .widget {
-  padding-top: 19%;
+
 }
 
 
@@ -83,9 +94,7 @@ const fetchData = async (pos: any) => {
 }
 .cards {
 
-  width: 100%;
-max-width: 92vw;
-  height:100%;
+
 }
 .color2 {
   background-color: #eed202;

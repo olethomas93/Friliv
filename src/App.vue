@@ -2,14 +2,11 @@
 import { RouterView } from "vue-router";
 import { usePositionStore } from "@/stores/position";
 import { onMounted, ref } from "vue";
-import { setMapStoreSuffix } from "pinia";
 import SearchButton from "./components/SearchButton.vue";
 import PlaceShow from './components/PlaceShow.vue'
-import ToolBar from './components/ToolBar.vue'
-import router from './router/index'
-import IconNavVue from "./components/IconNav.vue";
+
 import { useQuasar } from 'quasar'
-import IconNav from './components/IconNav.vue'
+
 const store = usePositionStore();
   const $q = useQuasar()
   $q.dark.mode = "auto"
@@ -27,7 +24,7 @@ onMounted(async ()=>{
 </script>
 
 <template>
-  <div class="">
+
 
   <q-layout view="hHh Lpr lff"    class="shadow-2 rounded-borders">
    
@@ -48,7 +45,7 @@ onMounted(async ()=>{
         show-if-above
         :width="200"
         :breakpoint="700"
-        class="bg-grey-3"
+        class="bg-grey-2"
         
       
         
@@ -121,7 +118,7 @@ onMounted(async ()=>{
 
 
 
-</div>
+
 
 
 </template>

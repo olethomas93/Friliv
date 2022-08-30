@@ -86,10 +86,10 @@ const locateMe = async () => {
 </script>
 
 <template>
-  <div class="q-pa-md background">
-    <div class="row q-gutter-md">
-      <div class="col-12 col-md">
-        <q-card class="cards" style="height: 100%">
+<div class="column">
+      <div class="col">
+        <q-card class="cards">
+          <q-card-section>
           <h5 class="mb-0">Vannstand nå</h5>
 
           <div class="content">
@@ -102,11 +102,13 @@ const locateMe = async () => {
               {{ currentLevel }}cm
             </div>
           </div>
+          </q-card-section>
         </q-card>
       </div>
 
-      <div class="col-12 col-md">
+      <div class="col">
         <q-card class="cards" style="height: 100%">
+        <q-card-section>
           <h5 class="">Neste høyvann</h5>
 
           <div class="content">
@@ -115,10 +117,12 @@ const locateMe = async () => {
               {{ nextHighTide }}
             </div>
           </div>
+          </q-card-section>
         </q-card>
       </div>
       <div class="col-12 col-md">
         <q-card class="cards" style="height: 100%">
+         <q-card-section>
           <h5 class="mb-0 ">Neste lavvann</h5>
 
           <div class="content">
@@ -131,21 +135,23 @@ const locateMe = async () => {
               {{ nextLowTide }}
             </div>
           </div>
+          </q-card-section>
         </q-card>
       </div>
-    </div>
-  </div>
+</div>
 </template>
 
 <style scoped>
 .cards {
  
   width: 100%;
-  max-width: 92vw;
-  height: 100%;
+  
+ 
 
   
 }
+
+
 
 h5{
   color:#777

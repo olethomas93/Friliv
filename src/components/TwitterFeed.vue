@@ -27,7 +27,7 @@ twitter.onload =()=>{
 <div class="twitterFeed">
   <a
     class="twitter-timeline"
-    data-height="500"
+    
     href="https://twitter.com/Varsom_no?ref_src=twsrc%5Etfw"
     > <q-circular-progress
       indeterminate

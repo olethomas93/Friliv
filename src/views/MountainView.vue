@@ -6,6 +6,8 @@ import "swiper/css";
 import WebCams from "@/components/WebCams.vue";
 import WebCams1 from "@/components/WebCams.vue";
 import TwitterFeed from "../components/TwitterFeed.vue";
+import { onMounted } from "vue";
+import router from "@/router";
 
 const onSwiper = (swiper: any) => {
   console.log(swiper);
@@ -13,30 +15,35 @@ const onSwiper = (swiper: any) => {
 const onSlideChange = () => {
   console.log("slide change");
 };
+
+onMounted(async () => {
+ 
+router.push('/mountain/skred')
+
+
+
+});
 </script>
 
 <template>
-<q-page>
-  <div class="q-pa-md q-gutter-xl">
+<q-page padding>
+ 
 
 
-<div class="row">
 
-  <div class="col-12">
-  <router-view v-slot="{ Component }">
+
+  <router-view v-slot="{ Component } ">
  <transition name="slide-fade" >
         <component :is="Component" />
       </transition>
   </router-view>
-</div>
-  </div>
-    <div class="row">
+  </q-page>
 
-      <div class="col">
-<div class="buttonNav q-gutter-lg">
+  <div class="buttonNave">
 
 
-            <q-btn class="btn" fab icon="ion-logo-twitter" color="secondary" to="/mountain/twitter" exact />
+ <q-btn-group square spread>
+     <q-btn class="btn" fab icon="ion-logo-twitter" color="secondary" to="/mountain/twitter" exact />
           
 
           
@@ -44,18 +51,17 @@ const onSlideChange = () => {
           
 
             <q-btn class="btn" fab icon="ion-videocam" color="secondary" to="/mountain/webcam" exact />
+    </q-btn-group>
+        
   </div>
-  </div>
-
-  </div>
-
-
-  </div>
-  </q-page>
+ 
 </template>
- <style scoped>
- .buttonNav{
-
- height: 100%;
+ <style  >
+ .buttonNave{
+bottom:0;
+position: sticky;
+overflow: hidden; 
 }
+
+
  </style>
