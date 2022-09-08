@@ -10,6 +10,7 @@ import AvaLanceVue from "@/components/AvaLance.vue";
 import WebCamsVue from "@/components/WebCams.vue";
 import SeaTideVue from "@/components/SeaTide.vue";
 import HuggTabelVue from "@/components/HuggTabel.vue";
+import AvaLanceCardVue from "@/components/AvaLanceCard.vue";
 
 const routes: Array<any> = [
   {
@@ -50,6 +51,9 @@ const routes: Array<any> = [
   {name:"skred",
   path:"skred",
 component:AvaLanceVue},
+{name:"skred2",
+path:"skred2",
+component:AvaLanceCardVue},
 {name:"webcam",
   path:"webcam",
 component:WebCamsVue}

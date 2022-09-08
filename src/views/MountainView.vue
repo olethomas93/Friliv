@@ -21,7 +21,7 @@ onMounted(() => {
 router.isReady().then(()=>{
 
 
-  router.push({name:'skred'})
+  router.push({name:'skred2'})
 })
 
 
@@ -52,7 +52,7 @@ router.isReady().then(()=>{
           
 
           
-            <q-btn class="btn" fab icon="ion-snow" color="secondary" to="/mountain/skred" exact />
+            <q-btn class="btn" fab icon="ion-snow" color="secondary" to="/mountain/skred2" exact />
           
 
             <q-btn class="btn" fab icon="ion-videocam" color="secondary" to="/mountain/webcam" exact />

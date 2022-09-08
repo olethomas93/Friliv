@@ -5,8 +5,7 @@ const VARSOM_URL =
   "https://api01.nve.no/hydrology/forecast/avalanche/v6.0.1/api/AvalancheWarningByCoordinates/Detail/";
 
 const avalanceData = ref();
-const location = ref();
-const errorStr = ref();
+const tab  = ref(0)
 const store = usePositionStore();
 
 const expanded = reactive([false,false,false])
@@ -31,22 +30,31 @@ console.log(avalanceData.value);
 
   return true;
 };
+
+const convertTime = (date:string) =>{
+
+ let date2 = new Date(date)
+
+
+ let dateString = `${date2.getDate()}/${date2.getMonth()+1}`
+return dateString
+}
 </script>
 
 <template>
   
-    <div class="row">
-      <div
-        class="col-12 col-md-6"
-        v-for="(forcast, index) in avalanceData"
-        :key="forcast"
-      >
+  
+    
         <q-card
           class="cards widget"
           
         >
           <q-card-section>
-            <div class="text-h6">{{ forcast.RegionName }}</div>
+            <q-tab-panels v-model="tab" animated>
+        <q-tab-panel  v-for="(forcast, index) in avalanceData"
+        :key="forcast" :name="index">
+        
+          <div class="text-h6">{{ forcast.RegionName }}</div>
             <h6 :class="'color' + forcast.DangerLevel" class="badge">
               {{ forcast.DangerLevel }}
             </h6>
@@ -54,11 +62,8 @@ console.log(avalanceData.value);
 
          
               <h6>{{ forcast.MainText }}</h6>
-             
-        
-            </q-card-section>
-            <q-card-actions>
-               <q-btn
+
+              <q-btn
           color="grey"
           round
           flat
@@ -67,9 +72,7 @@ console.log(avalanceData.value);
           :icon="expanded[index] ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
           @click="expanded[index] = !expanded[index]"
         />
-            </q-card-actions>
-
-             <q-slide-transition>
+        <q-slide-transition>
         <div v-show="expanded[index]">
           <q-separator />
           <q-card-section class="text-subitle2">
@@ -78,9 +81,32 @@ console.log(avalanceData.value);
           </q-card-section>
         </div>
       </q-slide-transition>
+        </q-tab-panel>
+
+      
+      </q-tab-panels>
+           
+    
+            </q-card-section>
+        
+
+
+
+
+
+            <q-card-actions>
+              <q-tabs v-model="tab" class="text-teal">
+        <q-tab  v-for="(forcast, index) in avalanceData"
+        :key="forcast" :name="index" :label=convertTime(forcast.PublishTime) />
+        
+      </q-tabs>
+            </q-card-actions>
+          
+       
+        
         </q-card>
-      </div>
-   </div>
+     
+
 
 </template>
 
