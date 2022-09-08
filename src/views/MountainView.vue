@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import Avalance from "@/components/AvaLance.vue";
-import WebCamsVue from "@/components/WebCams.vue";
-import { Swiper, SwiperSlide } from "swiper/vue";
-import "swiper/css";
-import WebCams from "@/components/WebCams.vue";
-import WebCams1 from "@/components/WebCams.vue";
-import TwitterFeed from "../components/TwitterFeed.vue";
-import { onMounted } from "vue";
 import router from "@/router";
+import "swiper/css";
+
+import { onMounted } from "vue";
+
+
 
 const onSwiper = (swiper: any) => {
   console.log(swiper);
@@ -16,9 +13,16 @@ const onSlideChange = () => {
   console.log("slide change");
 };
 
-onMounted(async () => {
+
+
+onMounted(() => {
  
-router.push('/mountain/skred')
+
+router.isReady().then(()=>{
+
+
+  router.push({name:'skred'})
+})
 
 
 
@@ -26,6 +30,7 @@ router.push('/mountain/skred')
 </script>
 
 <template>
+<div>
 <q-page padding>
  
 
@@ -54,7 +59,7 @@ router.push('/mountain/skred')
     </q-btn-group>
         
   </div>
- 
+ </div>
 </template>
  <style  >
  .buttonNave{
