@@ -6,12 +6,6 @@ const API_URL = "https://api.met.no/weatherapi/locationforecast/2.0/compact";
 
 const WeatherForecast = ref();
 
-const weatherNow = ref();
-const weatherTomorrow = ref();
-const weatherthird = ref();
-const icon_weather_third = ref();
-const icon_weather = ref();
-const icon_weather_tomorrow = ref();
 const index = ref();
 const location = ref();
 const gettingLocation = ref(false);
@@ -44,6 +38,9 @@ const fetchData = async (pos: any) => {
   WeatherForecast.value = await (
     await fetch(url1, { headers: { "User-Agent": "TestApp Theisen" } })
   ).json();
+
+  console.log(WeatherForecast.value);
+  
 
   
 

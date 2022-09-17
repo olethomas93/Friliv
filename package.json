@@ -11,6 +11,7 @@
   "dependencies": {
     "@types/geojson": "^7946.0.8",
     "@types/leaflet": "^1.7.10",
+    "chart.js": "^3.9.1",
     "leaflet": "^1.8.0",
     "netlify-cli": "^2.37.0",
     "pinia": "^2.0.13",
@@ -18,10 +19,12 @@
     "swiper": "^8.1.5",
     "twitter-widgets": "^2.0.0",
     "vue": "^3.2.33",
+    "vue-chartjs": "^4.1.1",
     "vue-router": "^4.0.14",
     "vue-tweet": "^2.0.2",
     "vue-twitter": "^0.1.0",
-    "vue-twitter-timeline": "^1.0.1"
+    "vue-twitter-timeline": "^1.0.1",
+    "vue3-grid-layout": "^1.0.0"
   },
   "devDependencies": {
     "@quasar/extras": "^1.15.1",

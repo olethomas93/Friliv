@@ -94,7 +94,7 @@ return dateString
 
 
 
-            <q-card-actions>
+            <q-card-actions class="action">
               <q-tabs v-model="tab" class="text-teal">
         <q-tab  v-for="(forcast, index) in avalanceData"
         :key="forcast" :name="index" :label=convertTime(forcast.PublishTime) />
@@ -115,7 +115,9 @@ return dateString
 
 }
 
-
+.action{
+  justify-content: center;
+}
 .text-h6{
   color:#777
 }

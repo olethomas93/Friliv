@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { usePositionStore } from "@/stores/position";
 import { onMounted, ref } from "vue";
+import { Line } from 'vue-chartjs'
+import LineChart from './LineChart.vue'
 
 const API_URL = "https://www.kartverket.no/api/vsl/tideforecast";
 const TIDE_LEVEL = "https://www.kartverket.no/api/vsl/tideLevels";
@@ -27,6 +29,11 @@ const fetchData = async (pos: any) => {
   tideForecast.value = await (await fetch(url1)).json();
   let tideData = await (await fetch(url2)).json();
 
+  console.log(tideForecast);
+  console.log(tideData);
+  
+  
+
 
   parseTideData(tideData);
 
@@ -43,22 +50,6 @@ const parseTideData = (tideData: any) => {
     new Date(tideData.result.nextLowTide.dateTime)
   );
 };
-const getLocation = async () => {
-  return new Promise((resolve, reject) => {
-    if (!("geolocation" in navigator)) {
-      reject(new Error("Geolocation is not available."));
-    }
-
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        resolve(pos);
-      },
-      (err) => {
-        reject(err);
-      }
-    );
-  });
-};
 
 const handleTime = (dataD: Date) => {
   let data = new Date(dataD);
@@ -71,25 +62,15 @@ const handleTime = (dataD: Date) => {
   const postTime = hour + ":" + minute;
   return postTime;
 };
-const locateMe = async () => {
-  gettingLocation.value = true;
-  try {
-    gettingLocation.value = false;
-    location.value = await getLocation();
-  } catch (e: any) {
-    gettingLocation.value = false;
-    errorStr.value = e.message;
-  }
 
-  return true;
-};
 </script>
 
 <template>
 <div class="column">
       <div class="col">
         <q-card class="cards">
-          <q-card-section>
+          <q-card-section >
+          
           <h5 class="mb-0">Vannstand nå</h5>
 
           <div class="content">
@@ -138,6 +119,7 @@ const locateMe = async () => {
           </q-card-section>
         </q-card>
       </div>
+    
 </div>
 </template>
 
