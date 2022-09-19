@@ -13,6 +13,7 @@
     const nextLowTide = ref();
     const TideData = ref()
     const tab  = ref(0)
+    const date  = ref("21.09.22")
     const store = usePositionStore();
     
     onMounted(async () => {
@@ -95,6 +96,11 @@
       const postTime = hour + ":" + minute;
       return postTime;
     };
+    const parseDate = (dataD: any) => {
+      let data = new Date(dataD);
+    
+      return `${data.getDate()}.${data.getMonth()+1}.${data.getFullYear()}`;
+    };
 
 
     
@@ -105,13 +111,13 @@
             <q-card flat class="cards">
               <q-card-section>
                <div v-if="tideForecast" class="container x mandatory-scroll-snapping">
-                    <div class="area"  v-for="(forcast, index) in tideForecast"
+                    <div class="cont" v-for="(forcast, index) in tideForecast"
         :key="forcast" :name="index">
 
-        
+            <div>{{parseDate(index)}}</div>
       
-    
-               <div style="display:flex;" v-for="item in forcast" >
+                <div class="area">
+               <div v-for="item in forcast" >
                 <q-separator :vertical="true"  inset /> 
                 <div class="content">
                    
@@ -127,6 +133,7 @@
           <q-separator :vertical="true" inset />
                 
                </div>
+              </div>
 
               
                
@@ -191,6 +198,12 @@
 
       display: flex;
       flex-direction: column;
+    }
+
+    .cont{
+
+          width: 100%;
+    flex: none;
     }
 
     .container {
