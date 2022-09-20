@@ -166,7 +166,7 @@ return dateString
     </script>
     
     <template>
-      <div class="q-pa-md">
+    
       
          
          
@@ -290,7 +290,7 @@ return dateString
            
           
        
-      </div>
+   
     </template>
     
     <style scoped>
@@ -299,6 +299,7 @@ return dateString
       flex-direction: row;
       align-items: center;
       overflow: auto;
+    
     
     
       column-gap: 10%;
@@ -339,12 +340,7 @@ margin-bottom: 10%;
     
     }
     
-    .cards {
-    
-      width: 100%;
-    max-width: 92vw;
-      height:100%;
-    }
+ 
     
     h5 {
       font-family: "Roboto Slab", sans-serif;

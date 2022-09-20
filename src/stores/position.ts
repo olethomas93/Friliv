@@ -10,9 +10,23 @@ export const usePositionStore = defineStore({
   actions: {
     async locateMe() {
     
-  const coord:GeolocationPosition  = await this.getCoord()
+
+      try{
+        const coord:GeolocationPosition  = await this.getCoord()
+        this.position = {latitude:coord.coords.latitude,longitude:coord.coords.longitude}
+
+      } catch (e){
+
+
+        console.log(e);
+        
+
+      }
+
+     
       
-      this.position = {latitude:coord.coords.latitude,longitude:coord.coords.longitude}
+      
+     
       
     },
 
@@ -27,10 +41,16 @@ export const usePositionStore = defineStore({
    async getPlace(){
 
     
-    
+    try{
 
-    let res =  await (await fetch(`https://ws.geonorge.no/stedsnavn/v1/punkt?nord=${this.position.latitude}&ost=${this.position.longitude}&koordsys=4258&radius=500&utkoordsys=4258&treffPerSide=10&side=1`)).json();
-    this.setPLace(res.navn[0].stedsnavn[0].skrivemåte)
+      let res =  await (await fetch(`https://ws.geonorge.no/stedsnavn/v1/punkt?nord=${this.position.latitude}&ost=${this.position.longitude}&koordsys=4258&radius=500&utkoordsys=4258&treffPerSide=10&side=1`)).json();
+      this.setPLace(res.navn[0].stedsnavn[0].skrivemåte)
+    }catch (e){
+console.log(e)
+
+    }
+
+   
 
     
     

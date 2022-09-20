@@ -12,7 +12,30 @@ const store = usePositionStore();
   $q.dark.mode = "auto"
 const tab = ref("");
 const drawerLeft= ref(false)
+const geolocation =ref(true)
+
 onMounted(async ()=>{
+
+
+ const Permission = await handlePermission()
+
+ if(Permission.state =='denied'){
+
+  geolocation.value = false;
+  $q.dialog({
+        title: 'aktiver lokasjon ',
+        message: 'Lokasjon er deaktivert for denne siden'
+      }).onOk(() => {
+        // console.log('OK')
+      }).onCancel(() => {
+        // console.log('Cancel')
+      }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+      })
+ }
+
+
+
 
   await store.locateMe()
 
@@ -21,12 +44,25 @@ onMounted(async ()=>{
  await store.getPlace()
   
 })
+
+const handlePermission=()=>{
+
+
+return new Promise<PermissionStatus>((res,rej)=>navigator.permissions.query({name:'geolocation'}).then((result:any)=>{
+
+
+  res(result)
+}))
+
+
+}
+
 </script>
 
 <template>
 
 
-  <q-layout view="hHh Lpr lff"    class="shadow-2 rounded-borders">
+  <q-layout v-if="geolocation" view="hHh Lpr lff"    class="shadow-2 rounded-borders">
    
             <q-header class="bg-white text-secondary">
 <div class="toolbar">
@@ -136,6 +172,22 @@ onMounted(async ()=>{
 
 @media (prefers-color-scheme: light) {
 
+
+
+}
+.cards {
+     
+     width: 100%;
+     
+    height: 100%;
+   
+     
+   }
+
+.body{
+
+  
+background-image: url("../assets/logofriliv.png");
 
 
 }

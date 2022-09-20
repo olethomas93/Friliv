@@ -7,7 +7,7 @@ onMounted(async () => {
  
 router.push('/sea/tide')
 
-console.log(router.currentRoute.value);
+
 
 
 });
