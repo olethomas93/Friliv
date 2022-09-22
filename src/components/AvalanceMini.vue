@@ -26,7 +26,7 @@
     const fetchData = async (pos: any) => {
       const url1 = `${VARSOM_URL}${pos.latitude}/${pos.longitude}/1`;
       avalanceData.value = await (await fetch(url1)).json();
-    console.log(avalanceData.value);
+   
     
      
     
@@ -44,7 +44,7 @@
               
             >
               <q-card-section v-if="avalanceData">
-                <div class="text-h6">Skredvarsling</div>
+                <div class="text-h6 text">Skredvarsling</div>
                 <div class="text-subtitle2">{{ avalanceData[0].RegionName }}</div>
                 <h6 :class="'color' + avalanceData[0].DangerLevel" class="badge">
                   {{ avalanceData[0].DangerLevel }}

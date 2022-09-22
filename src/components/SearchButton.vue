@@ -18,6 +18,6 @@ const showDialog = () => {
 </script>
 
 <template>
- <q-btn @click="showDialog" flat round dense icon="search" class="q-mr-sm" color="secondary"/>
+ <q-btn @click="showDialog" flat round dense icon="search" class="q-mr-sm" color="text"/>
  
 </template>

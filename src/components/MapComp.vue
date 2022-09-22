@@ -62,7 +62,7 @@ onMounted(async () => {
   );
 
   var norgeskart = leaflet.tileLayer(
-    "https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo4graatone&zoom={z}&x={x}&y={y}",
+    "https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo4&zoom={z}&x={x}&y={y}",
     {
       opacity: 0.7,
       maxZoom: 19,
@@ -70,9 +70,17 @@ onMounted(async () => {
       attribution: '&copy; <a href="https://www.kartverket.no/">Kartverket</a>',
     }
   );
+  var norgeIBilder = leaflet.tileLayer.wms(
+    "https://wms.geonorge.no/skwms1/wms.nib?",
+    {
+      layers:"ortofoto"
+      
+    }
+  );
 
   var baseMaps = {
     norgeskart: norgeskart,
+    norgeibilder:norgeIBilder
   };
 
   var overlay = {

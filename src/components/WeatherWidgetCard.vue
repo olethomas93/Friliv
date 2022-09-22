@@ -177,7 +177,7 @@ return dateString
             >
             <q-card-section>
                 <q-tab-panels v-model="tab" animated>
-                    <q-tab-panel  v-for="(forcast,index1) in weatherData"
+                    <q-tab-panel class="tab" v-for="(forcast,index1) in weatherData"
         :key="forcast" :name=index1>
         
               <div class="wrapper">
@@ -211,11 +211,11 @@ return dateString
            
           </div>
                 <div>
-                  <h5 class="mb-0"></h5>
+                  
     
                   <div
-                    class="card-body mb-1"
-                    style="color: white"
+                    class="card-body"
+                    
                     v-if="forcast"
                   >
                     {{

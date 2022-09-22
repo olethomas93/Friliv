@@ -22,7 +22,7 @@ const updateSW = registerSW({
 const app = createApp(App);
 
 app.use(Quasar, {
-  plugins: { Dialog,Dark }, // import Quasar plugins and add here
+  plugins: { Dialog }// import Quasar plugins and add here
 });
 
 app.use(createPinia());

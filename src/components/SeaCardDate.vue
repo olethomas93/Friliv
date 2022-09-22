@@ -3,7 +3,7 @@
     import { onMounted, ref } from "vue";
     import { Line } from 'vue-chartjs'
     import LineChart from './LineChart.vue'
-    
+    import router from "@/router";
     const API_URL = "https://www.kartverket.no/api/vsl/tideforecast";
     const TIDE_LEVEL = "https://www.kartverket.no/api/vsl/tideLevels";
     
@@ -68,7 +68,7 @@
     <template>
    
           
-            <q-card class="cards" @click="">
+            <q-card class="cards shadow-8 " @click="router.push('/sea')">
               <q-card-section >
               
                 <div class="text-h6">Vannstand nå</div>

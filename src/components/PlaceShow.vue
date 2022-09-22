@@ -8,17 +8,16 @@ const store = usePositionStore();
 
 <template>
 <div class="text">
-<q-icon name="pin_drop"  color="secondary"/>
+<q-icon class="btn" name="pin_drop" />
 
 
 {{store.place}}
+
 </div>
 </template>
 
 
 <style>
 
-.text{
-    color:"secondary" ;
-}
+
 </style>

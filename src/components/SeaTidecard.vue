@@ -28,7 +28,7 @@
       const url2 = `${TIDE_LEVEL}?latitude=${pos.latitude}&longitude=${pos.longitude}&place=&language=nb`;
       let res = await (await fetch(url1)).json();
       TideData.value = await (await fetch(url2)).json();
-      console.log(TideData)
+      
       
       
     tideForecast.value = parseForecast(res.result.forecasts)

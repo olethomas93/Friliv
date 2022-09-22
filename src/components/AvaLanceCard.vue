@@ -46,25 +46,25 @@ return dateString
   
     
         <q-card
-          class="cards widget"
+          class="cards"
           
         >
-          <q-card-section>
-            <q-tab-panels v-model="tab" animated>
-        <q-tab-panel  v-for="(forcast, index) in avalanceData"
+          <q-card-section >
+            <q-tab-panels   v-model="tab" animated  >
+        <q-tab-panel class="tab"   v-for="(forcast, index) in avalanceData"
         :key="forcast" :name="index">
         
           <div class="text-h6">{{ forcast.RegionName }}</div>
-            <h6 :class="'color' + forcast.DangerLevel" class="badge">
-              {{ forcast.DangerLevel }}
-            </h6>
+            
+
+            <q-badge :class="'color' + forcast.DangerLevel"  :label="forcast.DangerLevel" />
          
 
          
               <h6>{{ forcast.MainText }}</h6>
 
               <q-btn
-          color="grey"
+         
           round
           flat
           dense
@@ -95,7 +95,7 @@ return dateString
 
 
             <q-card-actions class="action">
-              <q-tabs v-model="tab" class="text-teal">
+              <q-tabs  v-model="tab" class="text-teal btn">
         <q-tab  v-for="(forcast, index) in avalanceData"
         :key="forcast" :name="index" :label=convertTime(forcast.PublishTime) />
         
@@ -111,29 +111,27 @@ return dateString
 </template>
 
 <style scoped>
-.widget {
 
-}
 
 .action{
   justify-content: center;
 }
-.text-h6{
-  color:#777
-}
-.cards {
 
 
-}
 .color2 {
   background-color: #eed202;
 }
+
+.color0 {
+  background-color: grey;
+}
+
 .color1 {
   background-color: green;
 }
 
 
-color3 {
+.color3 {
   background-color: red;
 }
 </style>

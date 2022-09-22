@@ -44,19 +44,19 @@ router.isReady().then(()=>{
   </router-view>
   </q-page>
 
-  <div class="buttonNave">
+  <div class="buttonNave btn">
 
 
- <q-btn-group square spread>
-     <q-btn class="btn" fab icon="ion-logo-twitter" color="secondary" to="/mountain/twitter" exact />
+ <q-btn-group square spread >
+     <q-btn class="btn" fab icon="ion-logo-twitter"  to="/mountain/twitter" exact />
           
 
           
-            <q-btn class="btn" fab icon="ion-snow" color="secondary" to="/mountain/skred2" exact />
+            <q-btn class="btn" fab icon="ion-snow"  to="/mountain/skred2" exact />
           
 
-            <q-btn class="btn" fab icon="ion-videocam" color="secondary" to="/mountain/webcam" exact />
-    </q-btn-group>
+            <q-btn class="btn" fab icon="ion-videocam" to="/mountain/webcam" exact />
+    </q-btn-group> 
         
   </div>
  </div>

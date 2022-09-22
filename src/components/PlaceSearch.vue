@@ -61,8 +61,8 @@ function onOkClick() {
   <q-dialog ref="dialogRef" @hide="onDialogHide" :maximized="true">
     <q-card class="q-dialog-plugin">
       <div class="container">
-        <div class="">
-          <div class="">
+        <div >
+          <div >
             <div class="searchBar">
               <input
               type="text"
@@ -81,7 +81,7 @@ function onOkClick() {
               
                 <div class="lokasjon">
                   Min lokasjon
-                  <q-icon name="my_location" size="sm" color="primary"></q-icon>
+                  <q-icon name="my_location" size="sm" class="text"></q-icon>
                 </div>
    
             </q-btn>
@@ -92,7 +92,7 @@ function onOkClick() {
               bordered
               separator
             >
-              <q-item class="text-secondary" clickable @click="setLocation(place)">
+              <q-item  clickable @click="setLocation(place)">
                 <q-item-section >
                   <q-item-label >{{ place.skrivemåte }}</q-item-label>
                   <q-item-label caption>

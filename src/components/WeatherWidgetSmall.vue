@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { usePositionStore } from "@/stores/position";
 import { onMounted, ref } from "vue";
-
+import router from "@/router";
 const API_URL = "https://api.met.no/weatherapi/locationforecast/2.0/compact";
 
 const WeatherForecast = ref();
@@ -168,7 +168,7 @@ const handleTimeNumber = (dataD: Date) => {
 </script>
 
 <template>
-  <q-card v-if="weatherData" class="cards">
+  <q-card v-if="weatherData" class="cards" @click="router.push('/weather')">
     <q-card-section>
         <div class="text-h6">Været nå</div>
       <div class="wrapper">

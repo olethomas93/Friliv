@@ -32,11 +32,11 @@ router.push('/sea/tide')
 
 
  <q-btn-group square spread>
-  <q-btn :class="{active:router.currentRoute.value.name=='tide'}" class="btn" fab icon="waves" color="secondary" to="/sea/tide" exact />
+  <q-btn  class="btn" fab icon="waves"  to="/sea/tide" exact />
           
 
           
-            <q-btn :class="{active:router.currentRoute.value.name=='hugg'}" class="btn" fab icon="table_chart"  color="secondary" to="/sea/hugg" exact />
+            <q-btn class="btn" fab icon="table_chart"   to="/sea/hugg" exact />
     </q-btn-group>
         
   </div>
@@ -45,11 +45,6 @@ router.push('/sea/tide')
 
 <style>
 
-.active{
 
-scale: 1.5;
- color: rgba(255, 255, 255, 1);
-  box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
-}
 
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <div class="row">
-    <div v-for="component in components" class="col-12 col-md-4">
+  <div class="row q-gutter-xs">
+    <div v-for="component in components" class="col-12 col-md-4 ">
     <component :is="component"></component>
   </div>
   </div>

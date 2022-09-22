@@ -13,6 +13,7 @@ import HuggTabelVue from "@/components/HuggTabel.vue";
 import AvaLanceCardVue from "@/components/AvaLanceCard.vue";
 import WeatherWidgetCardVue from "@/components/WeatherWidgetCard.vue";
 import SeaCardDateVue from "@/components/SeaCardDate.vue";
+import SeaTidecardVue from "@/components/SeaTidecard.vue";
 const routes: Array<any> = [
   {
     path: "/",
@@ -30,7 +31,7 @@ const routes: Array<any> = [
       {
         name:"tide",
         path:"tide",
-        component:SeaCardDateVue
+        component:SeaTidecardVue
       },
       {
         name:"hugg",
