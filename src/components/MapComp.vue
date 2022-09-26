@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { usePositionStore } from "@/stores/position";
 import leaflet from "leaflet";
-import { onMounted, ref } from "vue";
-let mymap:leaflet.Map;
+import { onMounted, onUnmounted, ref } from "vue";
+let mymap: leaflet.Map;
 
-const location = ref();
-const errorStr = ref();
+
 const store = usePositionStore();
 const Cabins: leaflet.Layer[] | undefined = [];
+
+onUnmounted(() => {
+  mymap.remove();
+});
 
 onMounted(async () => {
   const Turruter = leaflet.tileLayer.wms(
@@ -73,28 +76,25 @@ onMounted(async () => {
   var norgeIBilder = leaflet.tileLayer.wms(
     "https://wms.geonorge.no/skwms1/wms.nib?",
     {
-      layers:"ortofoto"
-      
+      layers: "ortofoto",
     }
   );
 
   var baseMaps = {
     norgeskart: norgeskart,
-    norgeibilder:norgeIBilder
+    norgeibilder: norgeIBilder,
   };
 
   var overlay = {
     Bratthet: bratthet,
-    Dybde:marineGrunnkart
+    Dybde: marineGrunnkart,
   };
   mymap = leaflet.map("mapid", {
     layers: [norgeskart],
-  })
+  });
 
-
-mymap.setView([store.position.latitude,store.position.longitude],13)
-setMapPosition(store.position)
-  
+  mymap.setView([store.position.latitude, store.position.longitude], 13);
+  setMapPosition(store.position);
 
   var layerControl = leaflet.control.layers(baseMaps, overlay).addTo(mymap);
 
@@ -174,34 +174,22 @@ setMapPosition(store.position)
 
   layerControl.addOverlay(cabinsLayer, "hytter").addTo(mymap);
 
-
-  store.$subscribe((mutation,state)=>{
-
-    setMapPosition(state.position)
-
-  })
+  store.$subscribe((mutation, state) => {
+    setMapPosition(state.position);
+  });
 });
 
- const setMapPosition = (pos:any)=>{
-
-
-
-
+const setMapPosition = (pos: any) => {
   leaflet
     .marker([pos.latitude, pos.longitude])
     .addTo(mymap)
     .bindPopup("Du er her")
     .openPopup();
 
-    
-  let test = leaflet.latLng(pos.latitude,pos.longitude)
+  let test = leaflet.latLng(pos.latitude, pos.longitude);
 
-
-
-mymap.flyTo(test,10)
-
-
- }
+  mymap.flyTo(test, 10);
+};
 
 const showInfo = (cabin: any) => {};
 </script>

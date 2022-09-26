@@ -15,6 +15,9 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       base: "/",
+      srcDir:"src",
+      filename:"sw.ts",
+      strategies: "injectManifest",
       workbox: {
         cleanupOutdatedCaches: true,
         skipWaiting: true,

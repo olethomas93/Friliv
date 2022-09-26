@@ -7,9 +7,6 @@ const API_URL = "https://api.met.no/weatherapi/locationforecast/2.0/compact";
 const WeatherForecast = ref();
 
 const index = ref();
-const location = ref();
-const gettingLocation = ref(false);
-const errorStr = ref();
 const store = usePositionStore();
 
 const weatherData = ref();
@@ -168,9 +165,13 @@ const handleTimeNumber = (dataD: Date) => {
 </script>
 
 <template>
-  <q-card v-if="weatherData" class="cards" @click="router.push('/weather')">
+  <q-card
+    v-if="weatherData"
+    class="cards text"
+    @click="router.push('/weather')"
+  >
     <q-card-section>
-        <div class="text-h6">Været nå</div>
+      <div class="text-h6">Været nå</div>
       <div class="wrapper">
         <img
           :src="
@@ -182,22 +183,20 @@ const handleTimeNumber = (dataD: Date) => {
           alt="ds"
         />
         <div>
-          
-
-          <div style="display: flex;
-    flex-direction: column;" v-if="weatherData">
-            <div>{{
-              roundNumber(
-                weatherData.today[index].data.instant.details.air_temperature
-              )
-            }}&#xb0;C
-</div>
-<div>
-            {{
-              roundNumber(
-                weatherData.today[index].data.instant.details.wind_speed
-              )
-            }}m/s
+          <div style="display: flex; flex-direction: column" v-if="weatherData">
+            <div>
+              {{
+                roundNumber(
+                  weatherData.today[index].data.instant.details.air_temperature
+                )
+              }}&#xb0;C
+            </div>
+            <div>
+              {{
+                roundNumber(
+                  weatherData.today[index].data.instant.details.wind_speed
+                )
+              }}m/s
             </div>
           </div>
         </div>

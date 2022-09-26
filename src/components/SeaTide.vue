@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { usePositionStore } from "@/stores/position";
 import { onMounted, ref } from "vue";
-import { Line } from 'vue-chartjs'
-import LineChart from './LineChart.vue'
+import { Line } from "vue-chartjs";
+import LineChart from "./LineChart.vue";
 
 const API_URL = "https://www.kartverket.no/api/vsl/tideforecast";
 const TIDE_LEVEL = "https://www.kartverket.no/api/vsl/tideLevels";
@@ -11,9 +11,6 @@ const currentLevel = ref();
 const nextHighTide = ref();
 const tideForecast = ref();
 const nextLowTide = ref();
-const location = ref();
-const gettingLocation = ref(false);
-const errorStr = ref();
 const store = usePositionStore();
 
 onMounted(async () => {
@@ -31,9 +28,6 @@ const fetchData = async (pos: any) => {
 
   console.log(tideForecast);
   console.log(tideData);
-  
-  
-
 
   parseTideData(tideData);
 
@@ -62,83 +56,65 @@ const handleTime = (dataD: Date) => {
   const postTime = hour + ":" + minute;
   return postTime;
 };
-
 </script>
 
 <template>
-<div class="column">
-      <div class="col">
-        <q-card class="cards">
-          <q-card-section >
-          
+  <div class="column">
+    <div class="col">
+      <q-card class="cards text">
+        <q-card-section>
           <h5 class="mb-0">Vannstand nå</h5>
 
           <div class="content">
             <img src="../assets/tide.svg" style="width: 30%" />
-            <div
-             
-             
-              v-if="currentLevel"
-            >
-              {{ currentLevel }}cm
-            </div>
+            <div v-if="currentLevel">{{ currentLevel }}cm</div>
           </div>
-          </q-card-section>
-        </q-card>
-      </div>
+        </q-card-section>
+      </q-card>
+    </div>
 
-      <div class="col">
-        <q-card class="cards" style="height: 100%">
+    <div class="col">
+      <q-card class="cards text" style="height: 100%">
         <q-card-section>
-          <h5 class="">Neste høyvann</h5>
+          <h5 class="text">Neste høyvann</h5>
 
-          <div class="content">
+          <div class="content text">
             <img src="../assets/tideup.svg" style="width: 30%" />
-            <div  v-if="nextHighTide">
+            <div v-if="nextHighTide">
               {{ nextHighTide }}
             </div>
           </div>
-          </q-card-section>
-        </q-card>
-      </div>
-      <div class="col-12 col-md">
-        <q-card class="cards" style="height: 100%">
-         <q-card-section>
-          <h5 class="mb-0 ">Neste lavvann</h5>
+        </q-card-section>
+      </q-card>
+    </div>
+    <div class="col-12 col-md">
+      <q-card class="cards" style="height: 100%">
+        <q-card-section>
+          <h5 class="mb-0">Neste lavvann</h5>
 
-          <div class="content">
-            <img
-              src="../assets/tidedown.svg"
-              style="width: 30%;"
-            />
+          <div class="content text">
+            <img src="../assets/tidedown.svg" style="width: 30%" />
 
-            <div  v-if="nextLowTide">
+            <div v-if="nextLowTide">
               {{ nextLowTide }}
             </div>
           </div>
-          </q-card-section>
-        </q-card>
-      </div>
-    
-</div>
+        </q-card-section>
+      </q-card>
+    </div>
+  </div>
 </template>
 
 <style scoped>
 .cards {
- 
   width: 100%;
-  
- 
-
-  
 }
 
-
-
-h5{
-  color:#777
+h5 {
+  color: #777;
 }
-.background{}
+.background {
+}
 .aligncolumn {
   display: flex;
   align-items: center;
@@ -151,8 +127,7 @@ h5{
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-    align-content: center;
-  
+  align-content: center;
 }
 
 .widget {

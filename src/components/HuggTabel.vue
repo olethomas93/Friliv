@@ -7,12 +7,11 @@
 
 <style scoped>
 .full-image__img {
-    display: block;
-    position: relative;
-    width: 100%;
-    -o-object-fit: cover;
-    object-fit: cover;
-    margin: 0 auto;
+  display: block;
+  position: relative;
+  width: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  margin: 0 auto;
 }
-
 </style>

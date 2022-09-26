@@ -40,9 +40,6 @@ const fetchData = async (pos: any) => {
   ).json();
 
   console.log(WeatherForecast.value);
-  
-
-  
 
   parseWeatherData(WeatherForecast.value);
 
@@ -90,18 +87,13 @@ const getIndex = (timeseries: Array<any>) => {
     let date = new Date(timeseries[i].time);
 
     let diff = +now - +date;
-  
-    
-    
 
     if (Math.abs(diff) < Math.abs(+closest - +now)) {
       closest = timeseries[i].time;
-   
-      
+
       index = i;
     }
   }
-  
 
   return index;
 };
@@ -187,229 +179,216 @@ const locateMe = async () => {
 
 <template>
   <div class="q-pa-md">
-    <div class="row  q-gutter-md">
-     
-     <div class="col-12 col-md">
-        <q-card
-          v-if="weatherData"
-          class="cards"
-          
-        >
-        <q-card-section>
-          <div class="wrapper">
-            <img
-              :src="
-                'img/weather/' +
-                weatherData.today[index].data.next_1_hours.summary.symbol_code +
-                '.svg'
-              "
-              style="width: 20%"
-              alt="ds"
-            />
-            <div>
-              <h5 class="mb-0">Været nå</h5>
-
-              <div
-                class="card-body mb-1"
-                style="color: white"
-                v-if="weatherData"
-              >
-                {{
-                  roundNumber(
-                    weatherData.today[index].data.instant.details
-                      .air_temperature
-                  )
-                }}&#xb0;
-              </div>
-            </div>
-          </div>
-          <div class="small">
-            <template v-for="item in weatherData.today" v-bind:key="item">
-              <div>
-                <img
-                  :src="
-                    'img/weather/' +
-                    item.data.next_1_hours.summary.symbol_code +
-                    '.svg'
-                  "
-                  style="width: 4vh"
-                  alt="ds"
-                />
-
-                <div class="temp">
-                  <h6>
-                    {{
-                      roundNumber(item.data.instant.details.air_temperature)
-                    }}&#xb0;
-                  </h6>
-
-                  <div class="wind">
-                   {{item.data.instant.details.wind_speed}}m/s
-                  </div>
-
-                  <div>{{ printDate(item) }}</div>
-                </div>
-              </div>
-            </template>
-          </div>
-          </q-card-section>
-        </q-card>
-        </div>
-   
+    <div class="row q-gutter-md">
       <div class="col-12 col-md">
-        <q-card
-          v-if="weatherData"
-          class="cards"
-          
-        >
-        <q-card-section>
-          <div class="wrapper">
-            <img
-              :src="
-                'img/weather/' +
-                weatherData.tomorrow[6].data.next_1_hours.summary
-                  .symbol_code +
-                '.svg'
-              "
-              style="width: 20%"
-              alt="ds"
-            />
-            <div>
-              <h5 class="mb-0">Været i morgen</h5>
-
-              <div class="card-body mb-1 text-white">
-                {{
-                  roundNumber(
-                    weatherData.tomorrow[6].data.instant.details
-                      .air_temperature
-                  )
-                }}&#xb0;
-              </div>
-            </div>
-          </div>
-          <div class="small">
-            <template v-for="item in weatherData.tomorrow" v-bind:key="item">
+        <q-card v-if="weatherData" class="cards text">
+          <q-card-section>
+            <div class="wrapper">
+              <img
+                :src="
+                  'img/weather/' +
+                  weatherData.today[index].data.next_1_hours.summary
+                    .symbol_code +
+                  '.svg'
+                "
+                style="width: 20%"
+                alt="ds"
+              />
               <div>
-                <img
-                  :src="
-                    'img/weather/' +
-                    item.data.next_1_hours.summary.symbol_code +
-                    '.svg'
-                  "
-                  style="width: 4vh"
-                  alt="ds"
-                />
-                <div class="temp">
-                  <h6>
-                    {{
-                      roundNumber(item.data.instant.details.air_temperature)
-                    }}&#xb0;
-                  </h6>
+                <h5 class="mb-0">Været nå</h5>
 
-                  <div class="wind">
-                   {{item.data.instant.details.wind_speed}}m/s
-                  </div>
-
-                  <div>{{ printDate(item) }}</div>
+                <div
+                  class="card-body mb-1"
+                  style="color: white"
+                  v-if="weatherData"
+                >
+                  {{
+                    roundNumber(
+                      weatherData.today[index].data.instant.details
+                        .air_temperature
+                    )
+                  }}&#xb0;
                 </div>
               </div>
-            </template>
-          </div>
+            </div>
+            <div class="small">
+              <template v-for="item in weatherData.today" v-bind:key="item">
+                <div>
+                  <img
+                    :src="
+                      'img/weather/' +
+                      item.data.next_1_hours.summary.symbol_code +
+                      '.svg'
+                    "
+                    style="width: 4vh"
+                    alt="ds"
+                  />
+
+                  <div class="temp">
+                    <h6>
+                      {{
+                        roundNumber(item.data.instant.details.air_temperature)
+                      }}&#xb0;
+                    </h6>
+
+                    <div class="wind">
+                      {{ item.data.instant.details.wind_speed }}m/s
+                    </div>
+
+                    <div>{{ printDate(item) }}</div>
+                  </div>
+                </div>
+              </template>
+            </div>
           </q-card-section>
         </q-card>
-     </div>
-     <div class="col-12 col-md">
-        <q-card
-          v-if="weatherData"
-          class="cards"
-        
-        >
+      </div>
 
-        <q-card-section>
-          <div class="wrapper">
-            <img
-              v-if="
-                weatherData.dayafter[6].data.next_1_hours.summary
-                  .symbol_code
-              "
-              :src="
-                'img/weather/' +
-                weatherData.dayafter[6].data.next_1_hours.summary
-                  .symbol_code +
-                '.svg'
-              "
-              style="width: 20%"
-              alt="ds"
-            />
-            <img
-              v-else
-              :src="
-                'img/weather/' +
-                weatherData.dayafter[6].data.next_6_hours.summary.symbol_code +
-                '.svg'
-              "
-              style="width: 20%"
-              alt="ds"
-            />
-            <div>
-              <h5 class="mb-0 " >Været i overmorgen</h5>
-
-              <div class="card-body mb-1 text-white" style="color: white">
-                {{
-                  roundNumber(
-                    weatherData.dayafter[6].data.instant.details.air_temperature
-                  )
-                }}&#xb0;
-              </div>
-            </div>
-          </div>
-          <div class="small">
-            <template v-for="item in weatherData.dayafter" v-bind:key="item">
+      <div class="col-12 col-md">
+        <q-card v-if="weatherData" class="cards text">
+          <q-card-section>
+            <div class="wrapper">
+              <img
+                :src="
+                  'img/weather/' +
+                  weatherData.tomorrow[6].data.next_1_hours.summary
+                    .symbol_code +
+                  '.svg'
+                "
+                style="width: 20%"
+                alt="ds"
+              />
               <div>
-                <img
-                  v-if="item.data.next_1_hours"
-                  :src="
-                    'img/weather/' +
-                    item.data.next_1_hours.summary.symbol_code +
-                    '.svg'
-                  "
-                  style="width: 4vh"
-                  alt="ds"
-                />
+                <h5 class="mb-0">Været i morgen</h5>
 
-                <img
-                  v-else
-                  :src="
-                    'img/weather/' +
-                    item.data.next_6_hours.summary.symbol_code +
-                    '.svg'
-                  "
-                  style="width: 4vh"
-                  alt="ds"
-                />
-
-                <div class="temp">
-                  <h6>
-                    {{
-                      roundNumber(item.data.instant.details.air_temperature)
-                    }}&#xb0;
-                  </h6>
-                  <div class="wind">
-                   {{item.data.instant.details.wind_speed}}m/s
-                  </div>
-
-                  <div v-if="item.data.next_1_hours">
-                    {{ printDate(item) }}
-                  </div>
-                  <div v-else>{{ nextHour(item) }}</div>
+                <div class="card-body mb-1 text-white">
+                  {{
+                    roundNumber(
+                      weatherData.tomorrow[6].data.instant.details
+                        .air_temperature
+                    )
+                  }}&#xb0;
                 </div>
               </div>
-            </template>
-          </div>
+            </div>
+            <div class="small">
+              <template v-for="item in weatherData.tomorrow" v-bind:key="item">
+                <div>
+                  <img
+                    :src="
+                      'img/weather/' +
+                      item.data.next_1_hours.summary.symbol_code +
+                      '.svg'
+                    "
+                    style="width: 4vh"
+                    alt="ds"
+                  />
+                  <div class="temp">
+                    <h6>
+                      {{
+                        roundNumber(item.data.instant.details.air_temperature)
+                      }}&#xb0;
+                    </h6>
+
+                    <div class="wind">
+                      {{ item.data.instant.details.wind_speed }}m/s
+                    </div>
+
+                    <div>{{ printDate(item) }}</div>
+                  </div>
+                </div>
+              </template>
+            </div>
           </q-card-section>
         </q-card>
-        </div>
-      
+      </div>
+      <div class="col-12 col-md">
+        <q-card v-if="weatherData" class="cards text">
+          <q-card-section>
+            <div class="wrapper">
+              <img
+                v-if="
+                  weatherData.dayafter[6].data.next_1_hours.summary.symbol_code
+                "
+                :src="
+                  'img/weather/' +
+                  weatherData.dayafter[6].data.next_1_hours.summary
+                    .symbol_code +
+                  '.svg'
+                "
+                style="width: 20%"
+                alt="ds"
+              />
+              <img
+                v-else
+                :src="
+                  'img/weather/' +
+                  weatherData.dayafter[6].data.next_6_hours.summary
+                    .symbol_code +
+                  '.svg'
+                "
+                style="width: 20%"
+                alt="ds"
+              />
+              <div>
+                <h5 class="mb-0">Været i overmorgen</h5>
+
+                <div class="card-body mb-1 text-white" style="color: white">
+                  {{
+                    roundNumber(
+                      weatherData.dayafter[6].data.instant.details
+                        .air_temperature
+                    )
+                  }}&#xb0;
+                </div>
+              </div>
+            </div>
+            <div class="small">
+              <template v-for="item in weatherData.dayafter" v-bind:key="item">
+                <div>
+                  <img
+                    v-if="item.data.next_1_hours"
+                    :src="
+                      'img/weather/' +
+                      item.data.next_1_hours.summary.symbol_code +
+                      '.svg'
+                    "
+                    style="width: 4vh"
+                    alt="ds"
+                  />
+
+                  <img
+                    v-else
+                    :src="
+                      'img/weather/' +
+                      item.data.next_6_hours.summary.symbol_code +
+                      '.svg'
+                    "
+                    style="width: 4vh"
+                    alt="ds"
+                  />
+
+                  <div class="temp">
+                    <h6>
+                      {{
+                        roundNumber(item.data.instant.details.air_temperature)
+                      }}&#xb0;
+                    </h6>
+                    <div class="wind">
+                      {{ item.data.instant.details.wind_speed }}m/s
+                    </div>
+
+                    <div v-if="item.data.next_1_hours">
+                      {{ printDate(item) }}
+                    </div>
+                    <div v-else>{{ nextHour(item) }}</div>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </q-card-section>
+        </q-card>
+      </div>
     </div>
   </div>
 </template>
@@ -420,7 +399,6 @@ const locateMe = async () => {
   flex-direction: row;
   align-items: center;
   overflow: auto;
-
 
   column-gap: 10%;
 }
@@ -445,24 +423,20 @@ const locateMe = async () => {
   padding-top: 5%;
 }
 
-.wind{
-display: flex;
-flex-direction: row;
-
+.wind {
+  display: flex;
+  flex-direction: row;
 }
 
 .cards {
-
   width: 100%;
-max-width: 92vw;
-  height:100%;
+  max-width: 92vw;
+  height: 100%;
 }
 
 h5 {
   font-family: "Roboto Slab", sans-serif;
 }
-
-
 
 .card-body {
   font-weight: bold;

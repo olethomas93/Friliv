@@ -1,6 +1,5 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-import { registerSW } from "virtual:pwa-register";
 
 import { Quasar, Dialog,Dark } from "quasar";
 import App from "./App.vue";
@@ -14,11 +13,14 @@ import "quasar/src/css/index.sass";
 
 
 
-const updateSW = registerSW({
-  onOfflineReady() {
-    console.log("offline ready");
-  },
-});
+
+
+
+
+
+
+
+
 const app = createApp(App);
 
 app.use(Quasar, {

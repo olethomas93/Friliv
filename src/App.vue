@@ -4,6 +4,7 @@ import { usePositionStore } from "@/stores/position";
 import { onMounted, ref } from "vue";
 import SearchButton from "./components/SearchButton.vue";
 import PlaceShow from "./components/PlaceShow.vue";
+import ReloadPWAVue from "./components/ReloadPWA.vue";
 
 import { useQuasar } from "quasar";
 
@@ -54,6 +55,7 @@ const handlePermission = () => {
     view="hHh Lpr lff"
     class="shadow-2 rounded-borders layout"
   >
+  
     <q-header class="">
       <div class="toolbar">
         <q-btn
@@ -117,13 +119,14 @@ const handlePermission = () => {
               <q-icon name="map" color="" />
             </q-item-section>
 
-            <q-item-section class=""> Kart </q-item-section>
+            <q-item-section active-class="myactiveclass"> Kart </q-item-section>
           </q-item>
         </q-list>
       </q-scroll-area>
     </q-drawer>
 
     <q-page-container>
+      <ReloadPWAVue />
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
           <component :is="Component" />
@@ -165,7 +168,7 @@ const handlePermission = () => {
   .myactiveclass{
 
 
-color: #26A69A !important;
+color: #332940 !important;
 }
 
   .layout {
@@ -201,7 +204,7 @@ color: #26A69A !important;
   .myactiveclass{
 
 
-    color: #BB86FC;
+    color: #70efde;
   }
 
   .layout {

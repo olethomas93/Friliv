@@ -2,22 +2,14 @@
 import { usePositionStore } from "@/stores/position";
 
 const store = usePositionStore();
-
-
 </script>
 
 <template>
-<div class="text">
-<q-icon class="btn" name="pin_drop" />
+  <div class="text">
+    <q-icon class="btn" name="pin_drop" />
 
-
-{{store.place}}
-
-</div>
+    {{ store.place }}
+  </div>
 </template>
 
-
-<style>
-
-
-</style>
+<style></style>

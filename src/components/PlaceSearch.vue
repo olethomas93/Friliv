@@ -28,12 +28,11 @@ const getPlaces = () => {
   }
 };
 
-const setPosition = async () =>{
-
-  await store.locateMe()
-  await store.getPlace()
-  onDialogCancel()
-}
+const setPosition = async () => {
+  await store.locateMe();
+  await store.getPlace();
+  onDialogCancel();
+};
 const setLocation = (place: any) => {
   store.setLocation({
     latitude: place.representasjonspunkt.nord,
@@ -51,22 +50,18 @@ const setLocation = (place: any) => {
 function onOkClick() {
   onDialogOK();
 }
-
-
-
-
 </script>
 
 <template>
   <q-dialog ref="dialogRef" @hide="onDialogHide" :maximized="true">
     <q-card class="q-dialog-plugin">
       <div class="container">
-        <div >
-          <div >
+        <div>
+          <div>
             <div class="searchBar">
               <input
-              type="text"
-              autocomplete="on"
+                type="text"
+                autocomplete="on"
                 class="inputfield"
                 rounded
                 outlined
@@ -77,24 +72,22 @@ function onOkClick() {
               <q-icon name="close" size="lg" @click="onDialogCancel"> </q-icon>
             </div>
             <div class="locatebtn">
-            <q-btn flat @click="setPosition()" style="width: 100%;">
-              
+              <q-btn flat @click="setPosition()" style="width: 100%">
                 <div class="lokasjon">
                   Min lokasjon
                   <q-icon name="my_location" size="sm" class="text"></q-icon>
                 </div>
-   
-            </q-btn>
-</div>
+              </q-btn>
+            </div>
             <q-list
               v-for="place in places"
               :key="place.stedsnummer"
               bordered
               separator
             >
-              <q-item  clickable @click="setLocation(place)">
-                <q-item-section >
-                  <q-item-label >{{ place.skrivemåte }}</q-item-label>
+              <q-item clickable @click="setLocation(place)">
+                <q-item-section>
+                  <q-item-label>{{ place.skrivemåte }}</q-item-label>
                   <q-item-label caption>
                     <div>
                       {{ place.navneobjekttype }}
@@ -119,9 +112,6 @@ function onOkClick() {
 .inputfield {
   width: 50em;
   border-radius: 10px;
-  
-
-  
 }
 .searchBar {
   display: flex;
@@ -136,7 +126,7 @@ function onOkClick() {
   align-items: center;
 }
 
-.locatebtn{
+.locatebtn {
   width: 100%;
   margin-top: 2%;
 }

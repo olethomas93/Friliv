@@ -3,16 +3,10 @@
     <div class="row">
       <div class="col">
         <img class="logo" src="../assets/logofriliv.png" />
-        <icon-nav/>
+        <icon-nav />
       </div>
-      
-     
     </div>
-
-    
   </div>
-
-  
 </template>
 
 <script lang="ts">
@@ -20,11 +14,11 @@ import { defineComponent } from "vue";
 import IconNav from "./IconNav.vue";
 
 export default defineComponent({
-    name: "HelloWorld",
-    props: {
-        msg: String,
-    },
-    components: { IconNav }
+  name: "HelloWorld",
+  props: {
+    msg: String,
+  },
+  components: { IconNav },
 });
 </script>
 
@@ -35,12 +29,9 @@ export default defineComponent({
   width: 50%;
 }
 @media only screen and (min-width: 992px) {
-
-
-  .logo{
- margin-top: 10%;
-  width: 40%;
-
+  .logo {
+    margin-top: 10%;
+    width: 40%;
   }
 }
 h3 {
@@ -58,10 +49,8 @@ a {
   color: #42b983;
 }
 
-.col{
-  
-    display: flex;
-    justify-content: center;
-
+.col {
+  display: flex;
+  justify-content: center;
 }
 </style>
