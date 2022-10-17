@@ -26,9 +26,6 @@ const fetchData = async (pos: any) => {
   tideForecast.value = await (await fetch(url1)).json();
   let tideData = await (await fetch(url2)).json();
 
-  console.log(tideForecast);
-  console.log(tideData);
-
   parseTideData(tideData);
 
   return true;

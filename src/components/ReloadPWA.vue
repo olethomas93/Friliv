@@ -1,41 +1,36 @@
-<template>
-  <div v-if="offlineReady || needRefresh" class="flex flex-wrap" role="alert">
-    <div class="message mt-1">
-      <span v-if="offlineReady"> App ready to work offline </span>
-      <span v-else
-        >New content available, click on reload button to update.</span
-      >
-    </div>
-    <div class="buttons flex align-middle mt-2 md:mt-0">
-      <button v-if="needRefresh" @click="updateServiceWorker()" class="button">
-        Reload
-      </button>
-      <button @click="close" class="button">Close</button>
-    </div>
-  </div>
-</template>
-<script lang="ts">
-import { defineComponent } from "vue";
-import { useRegisterSW } from "virtual:pwa-register/vue";
-const { updateServiceWorker } = useRegisterSW();
-export default defineComponent({
-  name: "ReloadPWA",
-  setup() {
-    const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW();
-    const close = async () => {
-      offlineReady.value = false;
-      needRefresh.value = false;
-    };
-    return { offlineReady, needRefresh, updateServiceWorker, close };
+
+<script setup lang="ts">
+import { registerSW } from 'virtual:pwa-register'
+import {useQuasar } from "quasar";
+
+const $q = useQuasar()
+
+const updateSW = registerSW({
+
+  onNeedRefresh() {
+    $q.dialog({
+      title: 'Refresh page?',
+      message: 'New content'
+    }).onOk(() => {
+      updateSW()
+      // console.log('OK')
+    }).onCancel(() => {
+      // console.log('Cancel')
+    }).onDismiss(() => {
+      // console.log('I am triggered on both OK and Cancel')
+    })
   },
-  methods: {
-    async close() {
-      this.offlineReady = false;
-      this.needRefresh = false;
-    },
-    async updateServiceWorker() {
-      await updateServiceWorker();
-    },
+  onOfflineReady() {
+
+
+    console.log("OFFLINE READY PWA");
+    
   },
-});
+
+
+})
+
+
 </script>
+
+<template></template>

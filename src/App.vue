@@ -4,9 +4,8 @@ import { usePositionStore } from "@/stores/position";
 import { onMounted, ref } from "vue";
 import SearchButton from "./components/SearchButton.vue";
 import PlaceShow from "./components/PlaceShow.vue";
-import ReloadPWAVue from "./components/ReloadPWA.vue";
-
 import { useQuasar } from "quasar";
+import ReloadPWA from "./components/ReloadPWA.vue";
 
 const store = usePositionStore();
 const $q = useQuasar();
@@ -121,15 +120,16 @@ const handlePermission = () => {
 
             <q-item-section active-class="myactiveclass"> Kart </q-item-section>
           </q-item>
+        
         </q-list>
       </q-scroll-area>
     </q-drawer>
 
     <q-page-container>
-      <ReloadPWAVue />
-      <router-view v-slot="{ Component }">
+      <ReloadPWA></ReloadPWA>
+      <router-view v-slot="{ Component, route }">
         <transition name="fade" mode="out-in">
-          <component :is="Component" />
+          <component :is="Component" :key="route.path" />
         </transition>
       </router-view>
     </q-page-container>

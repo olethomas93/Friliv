@@ -4,7 +4,6 @@ import leaflet from "leaflet";
 import { onMounted, onUnmounted, ref } from "vue";
 let mymap: leaflet.Map;
 
-
 const store = usePositionStore();
 const Cabins: leaflet.Layer[] | undefined = [];
 
@@ -70,19 +69,25 @@ onMounted(async () => {
       opacity: 0.7,
       maxZoom: 19,
       detectRetina: true,
+      
       attribution: '&copy; <a href="https://www.kartverket.no/">Kartverket</a>',
     }
   );
-  var norgeIBilder = leaflet.tileLayer.wms(
-    "https://wms.geonorge.no/skwms1/wms.nib?",
+  var satelitt = leaflet.tileLayer.wms(
+    "https://openwms.statkart.no/skwms1/wms.sentinel2?",
     {
-      layers: "ortofoto",
+       layers:"sentinel2",
+       format:"image/png",
+      attribution: '&copy; <a href="https://www.kartverket.no/">Kartverket</a>',
     }
+   
+   
   );
 
   var baseMaps = {
     norgeskart: norgeskart,
-    norgeibilder: norgeIBilder,
+    Satelitt:satelitt
+ 
   };
 
   var overlay = {

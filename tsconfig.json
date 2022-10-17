@@ -1,6 +1,6 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue","node_modules/vite-plugin-pwa/client.d.ts"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue","node_modules/vite-plugin-pwa/client.d.ts", "src/modules/leaflet.offline/bundle.js", "src/modules/leaflet.offline/bundle.js", "src/modules/leaflet.offline/bundle.js", "src/modules/leaflet.offline/bundle.js", "src/modules/leaflet.offline/bundle.js"],
   "exclude": [
     "dist",
     "test",

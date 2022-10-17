@@ -12,7 +12,7 @@ export const usePositionStore = defineStore({
     
 
       try{
-        const coord:GeolocationPosition  = await this.getCoord()
+        const coord:GeolocationPosition = await this.getCoord()
         this.position = {latitude:coord.coords.latitude,longitude:coord.coords.longitude}
 
       } catch (e){

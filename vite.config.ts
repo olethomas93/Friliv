@@ -13,21 +13,19 @@ export default defineConfig({
       sassVariables: "src/quasar-variables.sass"
     }),
     VitePWA({
-      registerType: "autoUpdate",
-      base: "/",
-      srcDir:"src",
-      filename:"sw.ts",
-      strategies: "injectManifest",
+      registerType: "prompt",
       workbox: {
-        cleanupOutdatedCaches: true,
-        skipWaiting: true,
-        clientsClaim: true,
+      
+          globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+          sourcemap: true
+        
       },
       includeAssets: [
         "favicon.svg",
         "favicon.ico",
         "robots.txt",
         "apple-touch-icon.png",
+        "tide.svg"
       ],
       manifest: {
         name: "FriLiv",
