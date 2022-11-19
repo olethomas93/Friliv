@@ -1,18 +1,31 @@
 <script setup lang="ts">
 import { usePositionStore } from "@/stores/position";
-import leaflet from "leaflet";
+
+import L from "leaflet";
+
+// @ts-ignore
+import {velocityLayer} from 'leaflet-velocity'
+
+
 import { onMounted, onUnmounted, ref } from "vue";
-let mymap: leaflet.Map;
+let mymap: L.Map;
 
 const store = usePositionStore();
-const Cabins: leaflet.Layer[] | undefined = [];
-
+const Cabins: L.Layer[] | undefined = [];
+const windData = ref()
 onUnmounted(() => {
   mymap.remove();
 });
 
+function initMap(){
+
+}
 onMounted(async () => {
-  const Turruter = leaflet.tileLayer.wms(
+ 
+
+windData.value = await (await fetch('https://www.windy.northei.no/latest')).json()
+
+  const Turruter = L.tileLayer.wms(
     "https://openwms.statkart.no/skwms1/wms.friluftsruter2?",
     {
       layers: "Fotrute",
@@ -23,7 +36,7 @@ onMounted(async () => {
     }
   );
 
-  const bolgevarsel = leaflet.tileLayer.wms(
+  const bolgevarsel = L.tileLayer.wms(
     "https://geo.barentswatch.no/geoserver/bw/ows?",
     {
       layers: "waveforecast_area_iso_latest",
@@ -33,7 +46,7 @@ onMounted(async () => {
     }
   );
 
-  const laksekart = leaflet.tileLayer.wms(
+  const laksekart = L.tileLayer.wms(
     " https://laksekartogc.fylkesmannen.no/wms.ashx?",
     {
       layers: "layer_53",
@@ -43,7 +56,7 @@ onMounted(async () => {
     }
   );
 
-  const marineGrunnkart = leaflet.tileLayer.wms(
+  const marineGrunnkart = L.tileLayer.wms(
     "https://geo.ngu.no/mapserver/MarineGrunnkartWMS?",
     {
       layers: "Dybdeforhold",
@@ -53,7 +66,7 @@ onMounted(async () => {
     }
   );
 
-  const bratthet = leaflet.tileLayer.wms(
+  const bratthet = L.tileLayer.wms(
     "https://nve.geodataonline.no/arcgis/services/Bratthet/MapServer/WmsServer?",
     {
       layers: "Bratthet_snoskred",
@@ -63,7 +76,7 @@ onMounted(async () => {
     }
   );
 
-  var norgeskart = leaflet.tileLayer(
+  var norgeskart = L.tileLayer(
     "https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo4&zoom={z}&x={x}&y={y}",
     {
       opacity: 0.7,
@@ -73,7 +86,7 @@ onMounted(async () => {
       attribution: '&copy; <a href="https://www.kartverket.no/">Kartverket</a>',
     }
   );
-  var satelitt = leaflet.tileLayer.wms(
+  var satelitt = L.tileLayer.wms(
     "https://openwms.statkart.no/skwms1/wms.sentinel2?",
     {
        layers:"sentinel2",
@@ -94,14 +107,31 @@ onMounted(async () => {
     Bratthet: bratthet,
     Dybde: marineGrunnkart,
   };
-  mymap = leaflet.map("mapid", {
+  mymap = L.map("mapid", {
     layers: [norgeskart],
   });
 
   mymap.setView([store.position.latitude, store.position.longitude], 13);
   setMapPosition(store.position);
 
-  var layerControl = leaflet.control.layers(baseMaps, overlay).addTo(mymap);
+  var layerControl = L.control.layers(baseMaps, overlay).addTo(mymap);
+// @ts-ignore
+  var velocityLayer = L.velocityLayer({
+            displayValues: true,
+    displayOptions: {
+      velocityType: "Global Wind",
+      position: "bottomleft",
+      emptyString: "No wind data",
+      speedUnit: "ms",
+    directionString: "Direction",
+
+speedString: "Speed",
+    },
+    data: windData.value,
+    maxVelocity: 15
+});
+
+layerControl.addOverlay(velocityLayer, "Vind");
 
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
@@ -131,7 +161,7 @@ onMounted(async () => {
       lon: parseFloat(parsed[1]),
     };
 
-    var circle = leaflet.circle([cabin.lat, cabin.lon], {
+    var circle = L.circle([cabin.lat, cabin.lon], {
       color: "green",
       fillColor: "#f03",
       fillOpacity: 0.5,
@@ -175,7 +205,7 @@ onMounted(async () => {
     Cabins.push(circle);
   }
 
-  let cabinsLayer = leaflet.layerGroup(Cabins);
+  let cabinsLayer = L.layerGroup(Cabins);
 
   layerControl.addOverlay(cabinsLayer, "hytter").addTo(mymap);
 
@@ -185,16 +215,17 @@ onMounted(async () => {
 });
 
 const setMapPosition = (pos: any) => {
-  leaflet
+  L
     .marker([pos.latitude, pos.longitude])
     .addTo(mymap)
     .bindPopup("Du er her")
     .openPopup();
 
-  let test = leaflet.latLng(pos.latitude, pos.longitude);
+  let test = L.latLng(pos.latitude, pos.longitude);
 
   mymap.flyTo(test, 10);
 };
+
 
 const showInfo = (cabin: any) => {};
 </script>

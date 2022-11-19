@@ -1,6 +1,5 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-
 import { Quasar, Dialog } from "quasar";
 import App from "./App.vue";
 import router from "./router";
@@ -15,6 +14,7 @@ const app = createApp(App);
 app.use(Quasar, {
   plugins: { Dialog }, // import Quasar plugins and add here
 });
+
 
 app.use(createPinia());
 app.use(router);

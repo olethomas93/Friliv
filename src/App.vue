@@ -5,6 +5,7 @@ import { onMounted, ref } from "vue";
 import SearchButton from "./components/SearchButton.vue";
 import PlaceShow from "./components/PlaceShow.vue";
 import { useQuasar } from "quasar";
+import L from "leaflet";
 import ReloadPWA from "./components/ReloadPWA.vue";
 
 const store = usePositionStore();

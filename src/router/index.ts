@@ -78,7 +78,7 @@ component:WebCamsVue}
     path: "/map",
     name: "map",
     
-    component: OfflineMapVue,
+    component: MapViewVue,
   },
 ];
 
