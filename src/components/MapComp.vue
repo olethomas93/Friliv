@@ -5,7 +5,8 @@ import L from "leaflet";
 
 // @ts-ignore
 import {velocityLayer} from 'leaflet-velocity'
-
+// @ts-ignore
+import {heatLayer} from 'leaflet.heat'
 
 import { onMounted, onUnmounted, ref } from "vue";
 let mymap: L.Map;
@@ -13,6 +14,7 @@ let mymap: L.Map;
 const store = usePositionStore();
 const Cabins: L.Layer[] | undefined = [];
 const windData = ref()
+const auroraData = ref()
 onUnmounted(() => {
   mymap.remove();
 });
@@ -24,6 +26,8 @@ onMounted(async () => {
  
 
 windData.value = await (await fetch('https://www.windy.northei.no/latest')).json()
+
+auroraData.value = await(await fetch('https://www.windy.northei.no/aurora/model')).json()
 
   const Turruter = L.tileLayer.wms(
     "https://openwms.statkart.no/skwms1/wms.friluftsruter2?",
@@ -93,13 +97,17 @@ windData.value = await (await fetch('https://www.windy.northei.no/latest')).json
        format:"image/png",
       attribution: '&copy; <a href="https://www.kartverket.no/">Kartverket</a>',
     }
-   
-   
   );
+
+  var openstreet =  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+})
 
   var baseMaps = {
     norgeskart: norgeskart,
-    Satelitt:satelitt
+    Satelitt:satelitt,
+    openstreet:openstreet
  
   };
 
@@ -131,7 +139,39 @@ speedString: "Speed",
     maxVelocity: 15
 });
 
+
+
+function perc2color(perc:any) {
+	var r, g, b = 0;
+	if(perc < 50) {
+    g = 255;
+		r = Math.round(5.10 * perc);
+	
+	}
+	else {
+		r = 255;
+		g = Math.round(5.1 * perc);
+	}
+	var h = r * 0x10000 + g * 0x100 + b * 0x1;
+	return '#' + ('000000' + h.toString(16)).slice(-6);
+}
+
+var aurora =[]
+
+for(var coord of auroraData.value ){
+  let bounds = L.latLngBounds([[coord[0], coord[1]], [coord[0]+1, coord[1]+1]]);
+let color = perc2color(coord[2])
+let rec = L.rectangle(bounds, {fillOpacity:0.5,color: color, weight: 2,stroke:false})
+  
+aurora.push(rec)
+}
+// create an orange rectangle
+
+//@ts-ignore
+
+let auroraLayer = L.layerGroup(aurora);
 layerControl.addOverlay(velocityLayer, "Vind");
+layerControl.addOverlay(auroraLayer,'aurora')
 
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");

@@ -5,6 +5,7 @@ export const usePositionStore = defineStore({
   state: () => ({
     position: { latitude: 0, longitude: 0 },
     place: "",
+    placeNumber:0
   }),
   getters: {},
   actions: {
@@ -42,9 +43,11 @@ export const usePositionStore = defineStore({
 
     
     try{
+      // https://ws.geonorge.no/stedsnavn/v1/punkt?nord=${this.position.latitude}&ost=${this.position.longitude}&koordsys=4258&radius=500&utkoordsys=4258&treffPerSide=10&side=1
+      let res =  await (await fetch(`https://www.windy.northei.no/place?lat=${this.position.latitude}&lng=${this.position.longitude}`)).json();
+      this.setPLace(res._embedded.location[0].name)
+      this.setPlaceNumber(res._embedded.location[0].id)
 
-      let res =  await (await fetch(`https://ws.geonorge.no/stedsnavn/v1/punkt?nord=${this.position.latitude}&ost=${this.position.longitude}&koordsys=4258&radius=500&utkoordsys=4258&treffPerSide=10&side=1`)).json();
-      this.setPLace(res.navn[0].stedsnavn[0].skrivemåte)
     }catch (e){
 console.log(e)
 
@@ -59,6 +62,11 @@ console.log(e)
     setPLace(place:string){
 
       this.place = place
+    },
+
+    setPlaceNumber(numbr:number){
+this.placeNumber = numbr
+
     }
   },
 });

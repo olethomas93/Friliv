@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
 import { usePositionStore } from "@/stores/position";
-import { onMounted, ref } from "vue";
+import { onMounted, ref,onBeforeMount } from "vue";
 import SearchButton from "./components/SearchButton.vue";
 import PlaceShow from "./components/PlaceShow.vue";
 import { useQuasar } from "quasar";
@@ -15,7 +15,8 @@ const tab = ref("");
 const drawerLeft = ref(false);
 const geolocation = ref(true);
 
-onMounted(async () => {
+onBeforeMount(async ()=>{
+
   const Permission = await handlePermission();
 
   if (Permission.state == "denied") {
@@ -24,8 +25,8 @@ onMounted(async () => {
       title: "aktiver lokasjon ",
       message: "Lokasjon er deaktivert for denne siden",
     })
-      .onOk(() => {
-        // console.log('OK')
+      .onOk(async() => {
+ 
       })
       .onCancel(() => {
         // console.log('Cancel')
@@ -33,11 +34,18 @@ onMounted(async () => {
       .onDismiss(() => {
         // console.log('I am triggered on both OK and Cancel')
       });
+  }else{
+
+    await store.locateMe();
+
+await store.getPlace();
   }
 
-  await store.locateMe();
 
-  await store.getPlace();
+})
+onMounted(async () => {
+
+  
 });
 
 const handlePermission = () => {
@@ -238,8 +246,8 @@ color: #26A69A !important;
 .cards {
   width: 100%;
 
-  height: 100%;
-
+  min-height: 250px;
+  max-width: 800px;
   box-shadow: 0 5px 5px -3px rgb(0 0 0 / 20%), 0 8px 10px 1px rgb(0 0 0 / 14%),
     0 3px 14px 2px rgb(0 0 0 / 12%) !important;
 }

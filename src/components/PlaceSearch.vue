@@ -19,11 +19,12 @@ const getPlaces = () => {
     places.value = [];
   } else {
     fetch(
-      `https://ws.geonorge.no/stedsnavn/v1/navn?sok=${searchInput.value}*&treffPerSide=5&side=1`
+      `https://www.windy.northei.no/place/query?q=${searchInput.value}`
     )
       .then((res) => res.json())
       .then((res) => {
-        places.value = res.navn;
+        places.value = res._embedded.location;
+        
       });
   }
 };
@@ -35,11 +36,12 @@ const setPosition = async () => {
 };
 const setLocation = (place: any) => {
   store.setLocation({
-    latitude: place.representasjonspunkt.nord,
-    longitude: place.representasjonspunkt.øst,
+    latitude: place.position.lat,
+    longitude: place.position.lon,
   });
 
-  store.setPLace(place.skrivemåte);
+  store.setPLace(place.name);
+  store.setPlaceNumber(place.id)
 
   places.value = [];
   searchInput.value = "";
@@ -81,16 +83,16 @@ function onOkClick() {
             </div>
             <q-list
               v-for="place in places"
-              :key="place.stedsnummer"
+              :key="place.id"
               bordered
               separator
             >
               <q-item clickable @click="setLocation(place)">
                 <q-item-section>
-                  <q-item-label>{{ place.skrivemåte }}</q-item-label>
+                  <q-item-label>{{ place.name }}</q-item-label>
                   <q-item-label caption>
                     <div>
-                      {{ place.navneobjekttype }}
+                      {{ place.category.name }}
 
                       <div v-if="place.kommuner">
                         i

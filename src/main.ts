@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
+
 import { Quasar, Dialog } from "quasar";
 import App from "./App.vue";
 import router from "./router";
@@ -8,6 +9,7 @@ import "@quasar/extras/material-icons/material-icons.css";
 import "@quasar/extras/material-icons-round/material-icons-round.css";
 import "@quasar/extras/ionicons-v4/ionicons-v4.css";
 import "quasar/src/css/index.sass";
+import { usePositionStore } from "./stores/position";
 
 const app = createApp(App);
 
@@ -18,5 +20,7 @@ app.use(Quasar, {
 
 app.use(createPinia());
 app.use(router);
-
+const store = usePositionStore();
+store.locateMe()
+store.getPlace()
 app.mount("#app");
