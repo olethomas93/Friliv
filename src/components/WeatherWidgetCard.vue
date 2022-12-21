@@ -139,7 +139,7 @@ const handleTimeNumber = (dataD: Date) => {
   const postTime = hour;
 
   let nextHour = hrs + 6;
-  console.log(nextHour);
+
 
   let diff = nextHour - 24;
 

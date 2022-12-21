@@ -48,7 +48,7 @@ const routes: Array<any> = [
   
     component: MountainView,
     children:[
-      {name:"Twitter",
+      {name:"twitter",
     path:"twitter",
   component:TwitterFeedVue},
   {name:"skred",

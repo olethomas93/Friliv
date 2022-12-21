@@ -48,14 +48,14 @@ router.isReady().then(()=>{
 
 
  <q-btn-group square spread >
-     <q-btn class="btn" fab icon="ion-logo-twitter"  to="/mountain/twitter" exact />
+     <q-btn class="btn" fab icon="ion-logo-twitter"  to="twitter" exact />
           
 
           
-            <q-btn class="btn" fab icon="ion-snow"  to="/mountain/skred2" exact />
+            <q-btn class="btn" fab icon="ion-snow"  to="skred2" exact />
           
 
-            <q-btn class="btn" fab icon="ion-videocam" to="/mountain/webcam" exact />
+            <q-btn class="btn" fab icon="ion-videocam" to="webcam" exact />
     </q-btn-group> 
         
   </div>

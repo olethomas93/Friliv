@@ -32,11 +32,11 @@ router.push('/sea/tide')
 
 
  <q-btn-group square spread>
-  <q-btn  class="btn" fab icon="waves"  to="/sea/tide" exact />
+  <q-btn  class="btn" fab icon="waves"  :to="{name:'tide'}" exact />
           
 
           
-            <q-btn class="btn" fab icon="table_chart"   to="/sea/hugg" exact />
+            <q-btn class="btn" fab icon="table_chart"   :to="{name:'hugg'}" exact />
     </q-btn-group>
         
   </div>

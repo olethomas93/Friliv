@@ -58,9 +58,9 @@ const handleTime = (dataD: Date) => {
 <template>
   <div class="column">
     <div class="col">
-      <q-card class="cards text">
+      <q-card class="cards">
         <q-card-section>
-          <h5 class="mb-0">Vannstand nå</h5>
+          <div class="text-h6 text-white">Vannstand nå</div>
 
           <div class="content">
             <img src="../assets/tide.svg" style="width: 30%" />
@@ -134,8 +134,5 @@ h5 {
 .card-body {
   font-weight: bold;
 }
-.card-title {
-  font-family: sans-serif;
-  font-weight: bold;
-}
+
 </style>

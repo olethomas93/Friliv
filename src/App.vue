@@ -14,7 +14,7 @@ const $q = useQuasar();
 const tab = ref("");
 const drawerLeft = ref(false);
 const geolocation = ref(true);
-
+const miniState = ref(true)
 onBeforeMount(async ()=>{
 
   const Permission = await handlePermission();
@@ -60,11 +60,11 @@ const handlePermission = () => {
 <template>
   <q-layout
     v-if="geolocation"
-    view="hHh Lpr lff"
-    class="shadow-2 rounded-borders layout"
+    view="lHh lpR lFf"
+    class="shadow-2"
   >
   
-    <q-header class="">
+    <q-header elevated  class="toolbar">
       <div class="toolbar">
         <q-btn
           flat
@@ -88,6 +88,9 @@ const handlePermission = () => {
       :breakpoint="700"
       :elevated="true"
       class="navbar"
+      :mini="miniState"
+      @mouseover="miniState = false"
+      @mouseout="miniState = true"
     >
       <q-scroll-area class="fit">
         <q-list padding >
@@ -136,7 +139,7 @@ const handlePermission = () => {
 
     <q-page-container>
       <ReloadPWA></ReloadPWA>
-      <router-view v-slot="{ Component, route }">
+      <router-view  v-slot="{ Component, route }">
         <transition name="fade" mode="out-in">
           <component :is="Component" :key="route.path" />
         </transition>
@@ -147,13 +150,12 @@ const handlePermission = () => {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   .cards {
     background-color: rgba(30, 30, 30)!important ;
    
@@ -197,18 +199,16 @@ color: #BB86FC !important;
   }
 
  
-}
+} */
 
-@media (prefers-color-scheme: light) {
+
   .btn{
 
 color: #26A69A !important;
 
 }
 
-  .cards {
-    background-color: #F9F9F9 !important ;
-  }
+
 
   .myactiveclass{
 
@@ -221,24 +221,30 @@ color: #26A69A !important;
   }
 
   :root {
-    background-color: #F9F9F9 !important ;
+    background-color: #f4f3ef !important ;
   }
 
   .toolbar{
 
-background-color: #F9F9F9!important ;
+background-color:#f4f3ef !important;
 color: #26A69A !important;
 
   }
   .navbar{
 
-    background-color: #F9F9F9 !important ;
+    background-color: #212120 !important ;
     color: #26A69A !important;
+  }
+
+  .text-white{
+    color: #fff9f6 !important;
+  }
+  .text-dark{
+    color: #f9f9f9 !important;
   }
 
 
 
-}
 
 
 

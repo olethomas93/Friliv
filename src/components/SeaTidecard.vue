@@ -86,7 +86,7 @@ const parseDate = (dataD: any) => {
 </script>
 
 <template>
-  <q-card flat class="cards text">
+  <q-card  class="cards text">
     <q-card-section>
       <div v-if="tideForecast" class="container x mandatory-scroll-snapping">
         <div

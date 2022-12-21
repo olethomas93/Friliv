@@ -96,7 +96,7 @@ const getIndex = (timeseries: Array<any>) => {
 };
 const parseWeatherData = (weatherForecast: any) => {
   weatherData.value = filterDates(weatherForecast.properties.timeseries);
-
+console.log(weatherData.value)
   index.value = getIndex(weatherForecast.properties.timeseries);
 };
 
@@ -167,11 +167,11 @@ const handleTimeNumber = (dataD: Date) => {
 <template>
   <q-card
     v-if="weatherData"
-    class="cards text"
+    class="cards weathercard"
     @click="router.push('/weather')"
   >
     <q-card-section>
-      <div class="text-h6">Været nå</div>
+      <div class="text-h6 text-white">Været nå</div>
       <div class="wrapper">
         <img
           :src="
@@ -179,12 +179,13 @@ const handleTimeNumber = (dataD: Date) => {
             weatherData.today[index].data.next_1_hours.summary.symbol_code +
             '.svg'
           "
-          style="width: 20%"
+          style="width: 30% "
           alt="ds"
         />
         <div>
           <div style="display: flex; flex-direction: column" v-if="weatherData">
-            <div>
+            <div style="    font-family: ui-monospace;
+    font-size: xx-large;">
               {{
                 roundNumber(
                   weatherData.today[index].data.instant.details.air_temperature
@@ -219,10 +220,14 @@ const handleTimeNumber = (dataD: Date) => {
   scroll-snap-align: center;
 }
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+ display: flex;
+ flex-direction: row-reverse;
+ align-items: center;
+ justify-content: space-around;
+ 
+}
+.weathercard{
+  background: linear-gradient(90deg, rgba(33,147,176,1) 0%, rgba(109,213,237,1) 100%);
 }
 .aligncolumn {
   display: flex;

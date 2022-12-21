@@ -56,9 +56,9 @@ const handleTime = (dataD: Date) => {
 </script>
 
 <template>
-  <q-card class="cards shadow-8 text" @click="router.push('/sea')">
+  <q-card class="cards shadow-8" @click="router.push('/sea')">
     <q-card-section>
-      <div class="text-h6">Vannstand nå</div>
+      <div class="text-h6 text-white">Vannstand nå</div>
 
       <div class="content">
         <img src="../assets/tide.svg" style="width: 10%" />
@@ -103,16 +103,14 @@ h5 {
   justify-content: space-around;
   align-items: center;
 }
+.cards{
+  background-color: #bfd8d9 !important;
+
+}
 
 .widget {
   padding-top: 5%;
 }
 
-.card-body {
-  font-weight: bold;
-}
-.card-title {
-  font-family: sans-serif;
-  font-weight: bold;
-}
+
 </style>

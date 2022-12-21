@@ -29,13 +29,13 @@ const fetchData = async (pos: any) => {
 </script>
 
 <template>
-  <q-card class="cards" :ripple="true" @click="router.push('/mountain')">
+  <q-card class="cards avalance" :ripple="true" @click="router.push('/mountain')">
     <q-card-section v-if="avalanceData">
-      <div class="text-h6 text">Skredvarsling</div>
-      <div class="text-subtitle2 text">{{ avalanceData[0].RegionName }}</div>
-      <h6 :class="'color' + avalanceData[0].DangerLevel" class="badge text">
+      <div class="text-h6 text-white">Skredvarsling</div>
+      <div class="text-subtitle1 text-dark">{{ avalanceData[0].RegionName }}</div>
+      <div :class="'color' + avalanceData[0].DangerLevel" class="badge text-dark text-subtitle2">
         {{ avalanceData[0].DangerLevel }}
-      </h6>
+      </div>
 
       <!-- <h6>{{ avalanceData[0].MainText }}</h6> -->
     </q-card-section>
@@ -45,6 +45,10 @@ const fetchData = async (pos: any) => {
 <style scoped>
 .text-h6 {
   color: #777;
+}
+.badge{
+ border-radius: 10px;
+
 }
 .color2 {
   background-color: #eed202;
@@ -58,5 +62,11 @@ const fetchData = async (pos: any) => {
 
 .color3 {
   background-color: red;
+}
+.avalance{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #d4c1a9 !important;
 }
 </style>
