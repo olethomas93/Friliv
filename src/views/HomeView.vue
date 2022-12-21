@@ -1,6 +1,6 @@
 <template>
-  <div class="row q-gutter-xs items-center" style="margin-top: 1%;">
-    <div v-for="component in components" class="col-xs-12 col-sm-12 col-md-5 col-xl">
+  <div class="row q-gutter-md flex-center justify-evenly" style="margin-top: 1%; width: 100%;">
+    <div v-for="component in components" class="col-xs-12 col-sm-4 col-md-5 col-xl">
     <component :is="component"></component>
   </div>
   </div>

@@ -18,11 +18,11 @@ const onSlideChange = () => {
 onMounted(() => {
  
 
-router.isReady().then(()=>{
+// router.isReady().then(()=>{
 
 
-  router.push({name:'skred2'})
-})
+//   router.push({name:'skred2'})
+// })
 
 
 
@@ -42,23 +42,24 @@ router.isReady().then(()=>{
         <component :is="Component" />
       </transition>
   </router-view>
+  
+  <!-- <div class="buttonNave btn">
+
+
+<q-btn-group class="group" square spread >
+    <q-btn class="btn" fab icon="ion-logo-twitter"  to="twitter" exact />
+         
+
+         
+           <q-btn class="btn" fab icon="ion-snow"  to="skred2" exact />
+         
+
+           <q-btn class="btn" fab icon="ion-videocam" to="webcam" exact />
+   </q-btn-group> 
+       
+ </div> -->
   </q-page>
 
-  <div class="buttonNave btn">
-
-
- <q-btn-group square spread >
-     <q-btn class="btn" fab icon="ion-logo-twitter"  to="twitter" exact />
-          
-
-          
-            <q-btn class="btn" fab icon="ion-snow"  to="skred2" exact />
-          
-
-            <q-btn class="btn" fab icon="ion-videocam" to="webcam" exact />
-    </q-btn-group> 
-        
-  </div>
  </div>
 </template>
  <style  >
@@ -66,6 +67,11 @@ router.isReady().then(()=>{
 bottom:0;
 position: sticky;
 overflow: hidden; 
+z-index: 100;
+}
+
+.group{
+  z-index: 9999999999999999;
 }
 
 

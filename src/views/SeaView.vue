@@ -5,7 +5,7 @@ import { onMounted } from "vue";
 
 onMounted(async () => {
  
-router.push('/sea/tide')
+// router.push('/sea/tide')
 
 
 
@@ -28,7 +28,7 @@ router.push('/sea/tide')
   </router-view>
 
   </q-page>
-   <div class="buttonNave">
+   <!-- <div class="buttonNave">
 
 
  <q-btn-group square spread>
@@ -39,7 +39,7 @@ router.push('/sea/tide')
             <q-btn class="btn" fab icon="table_chart"   :to="{name:'hugg'}" exact />
     </q-btn-group>
         
-  </div>
+  </div> -->
   </div>
 </template>
 

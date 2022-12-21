@@ -93,46 +93,109 @@ const handlePermission = () => {
       @mouseout="miniState = true"
     >
       <q-scroll-area class="fit">
-        <q-list padding >
-          
-          <q-item active-class="myactiveclass" to="/" exact>
+        <q-list padding rounded-borders >
+          <q-expansion-item
+          to="/" exact
+          active-class="myactiveclass"
+        icon="home"
+        label="Hjem"
+        header-class="icon-green"
+        expand-icon="none"
+      ></q-expansion-item>
+          <!-- <q-item clickable active-class="myactiveclass" to="/" exact class="icon-green">
             <q-item-section avatar>
               <q-icon name="home"  />
             </q-item-section>
             <q-item-section > Hjem </q-item-section>
-          </q-item>
-
-          <q-item active-class="myactiveclass">
+          </q-item> -->
+          <q-expansion-item
+          active-class="myactiveclass"
+        icon="flutter_dash"
+        label="Jakt"
+        header-class="icon-green"
+        expand-icon="none"
+      >
+      <!-- <q-item active-class="myactiveclass" class="icon-exp">
             <q-item-section avatar>
               <q-icon name="flutter_dash" color="" />
             </q-item-section>
 
             <q-item-section > Jakt </q-item-section>
+          </q-item> -->
+    </q-expansion-item>
+         
+          <q-expansion-item
+       
+        icon="phishing"
+        label="Fiske"
+        header-class="icon-green"
+        expand-icon="none"
+      >
+      <q-item active-class="myactiveclass" to="/sea/tide" class="icon-exp" exact>
+            <!-- <q-item-section avatar>
+              <q-icon name="waves" color=""  />
+            </q-item-section> -->
+
+            <q-item-section active-class="myactiveclass" class=""> Flo/Fjære </q-item-section>
           </q-item>
+          <q-item active-class="myactiveclass" to="/sea/hugg" class="icon-exp" exact>
+            <!-- <q-item-section avatar>
+              <q-icon name="table_chart" color=""  />
+            </q-item-section> -->
 
-          <q-item active-class="myactiveclass" to="/sea" exact>
-            <q-item-section avatar>
-              <q-icon name="phishing" color=""  />
-            </q-item-section>
-
-            <q-item-section active-class="myactiveclass" class=""> Fiske </q-item-section>
+            <q-item-section active-class="myactiveclass" class=""> Huggtabel </q-item-section>
           </q-item>
+    </q-expansion-item>
+         
+    <q-expansion-item
+       
+       icon="landscape"
+       label="Topptur"
+       header-class="icon-green"
+       expand-icon="none"
+     >
 
-          <q-item active-class="myactiveclass" to="/mountain" exact>
-            <q-item-section avatar>
+          <q-item active-class="myactiveclass" :to="{name:'skred2'}" class="icon-exp" exact>
+            <!-- <q-item-section avatar>
               <q-icon name="landscape" color="" />
-            </q-item-section>
+            </q-item-section> -->
 
-            <q-item-section class=""> Topptur </q-item-section>
+            <q-item-section class=""> Skredvarsel </q-item-section>
           </q-item>
-          <q-item active-class="myactiveclass" to="/map" exact>
+          <q-item active-class="myactiveclass" :to="{name:'twitter'}" class="icon-exp" exact>
+            <!-- <q-item-section avatar>
+              <q-icon name="landscape" color="" />
+            </q-item-section> -->
+
+            <q-item-section class=""> Tweet varsom </q-item-section>
+          </q-item>
+          <q-item active-class="myactiveclass" :to="{name:'webcam'}" class="icon-exp" exact>
+            <!-- <q-item-section avatar>
+              <q-icon name="landscape" color="" />
+            </q-item-section> -->
+
+            <q-item-section class=""> webcam </q-item-section>
+          </q-item>
+
+
+        </q-expansion-item>
+
+        <q-expansion-item
+          to="/map" exact
+          active-class="myactiveclass"
+        icon="map"
+        label="Kart"
+        header-class="icon-green"
+        expand-icon="none"
+      ></q-expansion-item>
+          <!-- <q-item active-class="myactiveclass" to="/map" class="icon-green" exact>
             <q-item-section avatar>
               <q-icon name="map" color="" />
             </q-item-section>
 
             <q-item-section active-class="myactiveclass"> Kart </q-item-section>
           </q-item>
-        
+         -->
         </q-list>
       </q-scroll-area>
     </q-drawer>
@@ -204,7 +267,7 @@ color: #BB86FC !important;
 
   .btn{
 
-color: #26A69A !important;
+color: #3b5a57 !important;
 
 }
 
@@ -213,7 +276,7 @@ color: #26A69A !important;
   .myactiveclass{
 
 
-    color: #70efde;
+    color: #1d2423 !important;
   }
 
   .layout {
@@ -233,7 +296,16 @@ color: #26A69A !important;
   .navbar{
 
     background-color: #212120 !important ;
+   
+  }
+
+  .icon-green{
     color: #26A69A !important;
+  }
+
+  .icon-exp{
+    color: #48dacb !important;
+
   }
 
   .text-white{
@@ -252,8 +324,8 @@ color: #26A69A !important;
 .cards {
   width: 100%;
 
-  min-height: 250px;
-  max-width: 800px;
+  min-height: 30vh;
+ 
   box-shadow: 0 5px 5px -3px rgb(0 0 0 / 20%), 0 8px 10px 1px rgb(0 0 0 / 14%),
     0 3px 14px 2px rgb(0 0 0 / 12%) !important;
 }
