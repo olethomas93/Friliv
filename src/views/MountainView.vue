@@ -4,13 +4,15 @@ import "swiper/css";
 
 import { onMounted, ref } from "vue";
 
-
+const cabin = ref()
 const drawerRight = ref(false);
 const onSwiper = (swiper: any) => {
   console.log(swiper);
 };
 const drawer = (data:any) => {
+  cabin.value = data.data
   console.log(data)
+  console.log(cabin.value)
   drawerRight.value = true
 };
 
@@ -54,7 +56,16 @@ onMounted(() => {
       >
       <q-btn absolute-top-left round color="primary" icon="close" @click="closeDrawer" />
         <q-scroll-area class="fit">
-  
+          <q-card
+          v-if="cabin"
+       class="my-card text-dark"
+     >
+     <q-img :src="cabin.ntb_getCabin.pictureLegacyUrl" alt="no image"/>
+       <q-card-section>
+        <b>{{cabin.ntb_getCabin.name}}</b>
+       </q-card-section>
+     
+     </q-card>
         </q-scroll-area>
       </q-drawer>
 
