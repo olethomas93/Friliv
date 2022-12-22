@@ -15,6 +15,7 @@ import WeatherWidgetCardVue from "@/components/WeatherWidgetCard.vue";
 import SeaCardDateVue from "@/components/SeaCardDate.vue";
 import SeaTidecardVue from "@/components/SeaTidecard.vue";
 import OfflineMapVue from "@/components/OfflineMap.vue";
+import mapMountain from "@/components/mapMountain.vue"
 const routes: Array<any> = [
   {
     path: "/",
@@ -59,7 +60,10 @@ path:"skred2",
 component:AvaLanceCardVue},
 {name:"webcam",
   path:"webcam",
-component:WebCamsVue}
+component:WebCamsVue},
+{name:"skredmap",
+  path:"map",
+component:mapMountain}
     ]
   },
 

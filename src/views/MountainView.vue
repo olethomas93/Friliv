@@ -2,36 +2,36 @@
 import router from "@/router";
 import "swiper/css";
 
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 
 
-
+const drawerRight = ref(false);
 const onSwiper = (swiper: any) => {
   console.log(swiper);
 };
-const onSlideChange = () => {
-  console.log("slide change");
+const drawer = (data:any) => {
+  console.log(data)
+  drawerRight.value = true
 };
+
+
+const closeDrawer =() =>{
+
+drawerRight.value=false
+
+}
 
 
 
 onMounted(() => {
  
 
-// router.isReady().then(()=>{
-
-
-//   router.push({name:'skred2'})
-// })
-
-
-
 });
 </script>
 
 <template>
 <div>
-<q-page padding>
+
  
 
 
@@ -39,26 +39,24 @@ onMounted(() => {
 
   <router-view v-slot="{ Component } ">
  <transition name="slide-fade" >
-        <component :is="Component" />
+        <component :is="Component" @drawer:cabin="drawer" />
       </transition>
   </router-view>
   
-  <!-- <div class="buttonNave btn">
-
-
-<q-btn-group class="group" square spread >
-    <q-btn class="btn" fab icon="ion-logo-twitter"  to="twitter" exact />
-         
-
-         
-           <q-btn class="btn" fab icon="ion-snow"  to="skred2" exact />
-         
-
-           <q-btn class="btn" fab icon="ion-videocam" to="webcam" exact />
-   </q-btn-group> 
-       
- </div> -->
-  </q-page>
+  <q-drawer
+        v-model="drawerRight"
+        :width="300"
+        :breakpoint="500"
+        overlay
+        bordered
+        side="right"
+        class="bg-grey-3"
+      >
+      <q-btn absolute-top-left round color="primary" icon="close" @click="closeDrawer" />
+        <q-scroll-area class="fit">
+  
+        </q-scroll-area>
+      </q-drawer>
 
  </div>
 </template>

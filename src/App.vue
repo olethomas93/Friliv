@@ -60,7 +60,7 @@ const handlePermission = () => {
 <template>
   <q-layout
     v-if="geolocation"
-    view="lHh lpR lFf"
+    view="lHh lpR lFr"
     class="shadow-2"
   >
   
@@ -80,6 +80,8 @@ const handlePermission = () => {
         <SearchButton></SearchButton>
       </div>
     </q-header>
+
+  
 
     <q-drawer
       v-model="drawerLeft"
@@ -127,7 +129,7 @@ const handlePermission = () => {
           <q-expansion-item
        
         icon="phishing"
-        label="Fiske"
+        label="Sjø"
         header-class="icon-green"
         expand-icon="none"
       >
@@ -145,12 +147,19 @@ const handlePermission = () => {
 
             <q-item-section active-class="myactiveclass" class=""> Huggtabel </q-item-section>
           </q-item>
+
+          <q-item active-class="myactiveclass" :to="{name:'seamap'}" class="icon-exp" exact>
+          
+
+            <q-item-section class=""> Kart </q-item-section>
+          </q-item>
+
     </q-expansion-item>
          
     <q-expansion-item
        
        icon="landscape"
-       label="Topptur"
+       label="Fjell"
        header-class="icon-green"
        expand-icon="none"
      >
@@ -174,9 +183,15 @@ const handlePermission = () => {
               <q-icon name="landscape" color="" />
             </q-item-section> -->
 
-            <q-item-section class=""> webcam </q-item-section>
+            <q-item-section class=""> Webcam </q-item-section>
           </q-item>
+          <q-item active-class="myactiveclass" :to="{name:'skredmap'}" class="icon-exp" exact>
+            <!-- <q-item-section avatar>
+              <q-icon name="landscape" color="" />
+            </q-item-section> -->
 
+            <q-item-section class=""> Kart </q-item-section>
+          </q-item>
 
         </q-expansion-item>
 
@@ -187,7 +202,12 @@ const handlePermission = () => {
         label="Kart"
         header-class="icon-green"
         expand-icon="none"
-      ></q-expansion-item>
+      >
+    
+    
+    
+    
+    </q-expansion-item>
           <!-- <q-item active-class="myactiveclass" to="/map" class="icon-green" exact>
             <q-item-section avatar>
               <q-icon name="map" color="" />
