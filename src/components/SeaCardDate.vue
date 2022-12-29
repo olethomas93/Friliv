@@ -56,7 +56,7 @@ const handleTime = (dataD: Date) => {
 </script>
 
 <template>
-  <q-card class="cards shadow-8" @click="router.push('/sea')">
+  <q-card class="cards shadow-8" @click="router.push('/sea/tide')">
     <q-card-section>
       <div class="text-h6 text-white">Vannstand nå</div>
 

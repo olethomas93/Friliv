@@ -195,7 +195,7 @@ const handlePermission = () => {
 
         </q-expansion-item>
 
-        <q-expansion-item
+        <!-- <q-expansion-item
           to="/map" exact
           active-class="myactiveclass"
         icon="map"
@@ -207,7 +207,7 @@ const handlePermission = () => {
     
     
     
-    </q-expansion-item>
+    </q-expansion-item> -->
           <!-- <q-item active-class="myactiveclass" to="/map" class="icon-green" exact>
             <q-item-section avatar>
               <q-icon name="map" color="" />
@@ -364,7 +364,7 @@ nav {
 .toolbar {
   width: 100%;
   display: flex;
-  overflow: hidden;
+margin-right: 50px;
   flex-direction: row;
   align-content: center;
   justify-content: space-between;

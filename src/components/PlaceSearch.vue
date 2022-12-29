@@ -112,7 +112,7 @@ function onOkClick() {
 
 <style scoped>
 .inputfield {
-  width: 50em;
+  width: 25em;
   border-radius: 10px;
 }
 .searchBar {
@@ -131,5 +131,12 @@ function onOkClick() {
 .locatebtn {
   width: 100%;
   margin-top: 2%;
+}
+.container{
+
+  display: flex;
+    justify-content: center;
+    flex-direction: row;
+
 }
 </style>

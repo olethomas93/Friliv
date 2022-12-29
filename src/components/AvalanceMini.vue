@@ -29,7 +29,7 @@ const fetchData = async (pos: any) => {
 </script>
 
 <template>
-  <q-card class="cards avalance" :ripple="true" @click="router.push('/mountain')">
+  <q-card class="cards avalance" :ripple="true" @click="router.push('/mountain/skred2')">
     <q-card-section v-if="avalanceData">
       <div class="text-h6 text-white">Skredvarsling</div>
       <div class="text-subtitle1 text-dark">{{ avalanceData[0].RegionName }}</div>
@@ -37,7 +37,7 @@ const fetchData = async (pos: any) => {
         {{ avalanceData[0].DangerLevel }}
       </div>
 
-      <!-- <h6>{{ avalanceData[0].MainText }}</h6> -->
+      <div class="text-subtitle1 text-weight-regular" style="font-size: 1em;">{{ avalanceData[0].MainText }}</div>
     </q-card-section>
   </q-card>
 </template>

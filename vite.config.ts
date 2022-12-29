@@ -31,6 +31,7 @@ export default defineConfig({
       manifest: {
         name: "FriLiv",
         short_name: "FriLiv",
+        display:"fullscreen",
         description:
           "En app som gir deg info der du er om skred,været,flo/fjære,kart",
         theme_color: "#ffffff",

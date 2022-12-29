@@ -49,7 +49,7 @@ onMounted(async () => {
   var norgeskart = L.tileLayer(
     "https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo4&zoom={z}&x={x}&y={y}",
     {
-      opacity: 0.7,
+      opacity: 1,
       maxZoom: 19,
       detectRetina: true,
       
@@ -65,7 +65,10 @@ onMounted(async () => {
     }
   );
 
-
+  var openstreet =  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+})
 
   var baseMaps = {
     norgeskart: norgeskart,
@@ -78,8 +81,9 @@ onMounted(async () => {
     Turruter:Turruter
   };
   mymap = L.map("mapid", {
-    layers: [norgeskart],
+    layers: [openstreet],
   });
+  mymap.addLayer(norgeskart)
 
   mymap.setView([store.position.latitude, store.position.longitude], 13);
   setMapPosition(store.position);
@@ -150,30 +154,7 @@ onMounted(async () => {
       drawer.value= !drawer.value
       emit('drawer:cabin', data)
 
-//       e.target
-//         .bindPopup(
-//           `
-//           <div  style="width: 100%; height: 100%;">
-//           <q-card
-//       class="my-card text-white"
-//       style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)"
-//     >
-//       <q-card-section>
-//         <img src=${data.data.ntb_getCabin.pictureLegacyUrl} />
-//       </q-card-section>
 
-//       <q-card-section class="q-pt-none">
-//         <b>${data.data.ntb_getCabin.name}!</b>
-//       </q-card-section>
-//     </q-card>
-//   </div>
-         
-
-
-
-// `
-//         )
-//         .openPopup();
     });
 
     Cabins.push(circle);

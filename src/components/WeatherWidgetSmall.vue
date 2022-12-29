@@ -2,8 +2,9 @@
 import { usePositionStore } from "@/stores/position";
 import { onMounted, ref } from "vue";
 import router from "@/router";
+import { transform } from "@vue/compiler-core";
 const API_URL = "https://api.met.no/weatherapi/locationforecast/2.0/compact";
-
+const currentHour = "https://www.windy.northei.no/currenthour"
 const WeatherForecast = ref();
 
 const index = ref();
@@ -13,32 +14,20 @@ const weatherData = ref();
 
 onMounted(async () => {
   store.$subscribe((mutation, state) => {
-    fetchData(state.position);
+    fetchData(state.placeNumber);
   });
-  await fetchData(store.position);
-  let content = document.getElementsByClassName("small");
-  let innerContent = document.getElementsByClassName("temp");
-
-  let test = content[0].scrollWidth - innerContent[0].scrollWidth;
-
-  let dist = Math.abs(content[0]?.clientWidth);
-
-  content[0]?.scroll({ left: dist + test });
-  content[1]?.scroll({ left: dist * 2 });
-
-  content[2]?.scroll({ left: dist + test });
+  await fetchData(store.placeNumber);
 });
 
 const fetchData = async (pos: any) => {
-  const url1 = `${API_URL}?lat=${pos.latitude}&lon=${pos.longitude}`;
+  const url1 = `${currentHour}?place=${pos}`;
 
-  WeatherForecast.value = await (
-    await fetch(url1, { headers: { "User-Agent": "TestApp Theisen" } })
-  ).json();
 
-  console.log(WeatherForecast.value);
+   weatherData.value = (await (await fetch(url1)).json())
 
-  parseWeatherData(WeatherForecast.value);
+  console.log(weatherData.value)
+
+  //parseWeatherData(WeatherForecast.value);
 
   return true;
 };
@@ -142,6 +131,14 @@ const handleTime = (dataD: Date) => {
   return postTime;
 };
 
+const degreeToDirection = (degrees:number) =>{
+
+  const directions = ["N", "NNØ", "NØ", "ØNØ", "Ø", "ØSØ", "SØ", "SSØ", "S", "SSV", "SV", "VSV", "V", "VNV", "NV", "NNV"];
+  const index = Math.round(degrees / 22.5) % 16;
+  return directions[index];
+
+}
+
 const handleTimeNumber = (dataD: Date) => {
   let data = new Date(dataD);
   let hrs = data.getHours();
@@ -176,32 +173,54 @@ const handleTimeNumber = (dataD: Date) => {
         <img
           :src="
             'img/weather/' +
-            weatherData.today[index].data.next_1_hours.summary.symbol_code +
+            weatherData.symbolCode.next1Hour +
             '.svg'
           "
           style="width: 30% "
           alt="ds"
         />
         <div>
-          <div style="display: flex; flex-direction: column" v-if="weatherData">
-            <div style="    font-family: ui-monospace;
-    font-size: xx-large;">
+          <div style="display: flex; flex-direction: row; align-items: flex-end;" v-if="weatherData">
+            <div style="font-family: ui-monospace;font-size: 2.5em;" class="text-white">
               {{
                 roundNumber(
-                  weatherData.today[index].data.instant.details.air_temperature
+                  weatherData.temperature.value
                 )
-              }}&#xb0;C
+              }}&#xb0;
             </div>
-            <div>
-              {{
+            <div style="font-family: ui-monospace;font-size: 1em;" class="text-white">
+             Føles som {{
                 roundNumber(
-                  weatherData.today[index].data.instant.details.wind_speed
+                  weatherData.temperature.feelsLike
                 )
-              }}m/s
+              }}&#xb0;
             </div>
           </div>
+       
         </div>
       </div>
+      <q-separator />
+      <q-card-actions style="display: flex;flex-direction: row;justify-content: space-around;">
+        <div>
+              {{
+                degreeToDirection(
+                  weatherData.wind.direction
+                )
+              }}&#xb0;
+              <q-icon :style="{transform:`rotate(${ weatherData.wind.direction}deg)`}" name="north"></q-icon>
+            </div>
+            <div>
+              <q-icon color="white" size="2em" name="air"></q-icon>
+              {{
+                roundNumber(
+                  weatherData.wind.speed
+                )
+              }}m/s
+
+              ({{ weatherData.wind.gust }})
+            </div>
+        </q-card-actions>
+
     </q-card-section>
   </q-card>
 </template>

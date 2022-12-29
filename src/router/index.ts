@@ -16,6 +16,7 @@ import SeaCardDateVue from "@/components/SeaCardDate.vue";
 import SeaTidecardVue from "@/components/SeaTidecard.vue";
 import OfflineMapVue from "@/components/OfflineMap.vue";
 import mapMountain from "@/components/mapMountain.vue"
+import mapSea from "@/components/mapSea.vue"
 const routes: Array<any> = [
   {
     path: "/",
@@ -40,6 +41,11 @@ const routes: Array<any> = [
         path:"hugg",
         component:HuggTabelVue
       },
+      {
+        name:"seamap",
+        path:"kart",
+        component:mapSea
+      }
    
     ]
   },

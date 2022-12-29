@@ -25,6 +25,6 @@ const showDialog = () => {
     dense
     icon="search"
     class="q-mr-sm"
-    color="text"
+    color="black"
   />
 </template>
