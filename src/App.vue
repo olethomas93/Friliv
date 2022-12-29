@@ -44,7 +44,29 @@ await store.getPlace();
 
 })
 onMounted(async () => {
+  const Permission = await handlePermission();
 
+  if (Permission.state == "denied") {
+    geolocation.value = false;
+    $q.dialog({
+      title: "aktiver lokasjon ",
+      message: "Lokasjon er deaktivert for denne siden",
+    })
+      .onOk(async() => {
+ 
+      })
+      .onCancel(() => {
+        // console.log('Cancel')
+      })
+      .onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+      });
+  }else{
+
+    await store.locateMe();
+
+await store.getPlace();
+  }
   
 });
 
@@ -195,27 +217,7 @@ const handlePermission = () => {
 
         </q-expansion-item>
 
-        <!-- <q-expansion-item
-          to="/map" exact
-          active-class="myactiveclass"
-        icon="map"
-        label="Kart"
-        header-class="icon-green"
-        expand-icon="none"
-      >
-    
-    
-    
-    
-    </q-expansion-item> -->
-          <!-- <q-item active-class="myactiveclass" to="/map" class="icon-green" exact>
-            <q-item-section avatar>
-              <q-icon name="map" color="" />
-            </q-item-section>
 
-            <q-item-section active-class="myactiveclass"> Kart </q-item-section>
-          </q-item>
-         -->
         </q-list>
       </q-scroll-area>
     </q-drawer>
