@@ -4,6 +4,7 @@ export const usePositionStore = defineStore({
   id: "position",
   state: () => ({
     position: { latitude: 0, longitude: 0 },
+    newPosition:{ latitude: 0, longitude: 0 },
     place: "",
     placeNumber:0
   }),
@@ -37,6 +38,10 @@ export const usePositionStore = defineStore({
 
     setLocation(pos: any) {
       this.position = pos;
+    },
+
+    setNewLocation(pos:any){
+this.newPosition = pos
     },
 
    async getPlace(){

@@ -35,10 +35,11 @@ const setPosition = async () => {
   onDialogCancel();
 };
 const setLocation = (place: any) => {
-  store.setLocation({
+  store.setNewLocation({
     latitude: place.position.lat,
     longitude: place.position.lon,
   });
+
 
   store.setPLace(place.name);
   store.setPlaceNumber(place.id)

@@ -65,10 +65,16 @@ onMounted(async () => {
     }
   );
 
-  var openstreet =  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-})
+  var openstreet = L.tileLayer(
+    "https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=europa_forenklet&zoom={z}&x={x}&y={y}",
+    {
+      opacity: 1,
+      maxZoom: 19,
+      detectRetina: true,
+      
+      attribution: '&copy; <a href="https://www.kartverket.no/">Kartverket</a>',
+    }
+  );
 
   var baseMaps = {
     norgeskart: norgeskart,
@@ -165,7 +171,7 @@ onMounted(async () => {
   layerControl.addOverlay(cabinsLayer, "Hytter").addTo(mymap);
 
   store.$subscribe((mutation, state) => {
-    setMapPosition(state.position);
+    setMapPosition(state.newPosition);
   });
 });
 
