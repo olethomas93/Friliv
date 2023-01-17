@@ -20,23 +20,12 @@ function initMap(){
 onMounted(async () => {
  
 
-  const Turruter = L.tileLayer.wms(
-    "https://openwms.statkart.no/skwms1/wms.friluftsruter2?",
-    {
-      layers: "Fotrute",
-
-      transparent: true,
-      format: "image/png",
-      attribution: "NVE",
-    }
-  );
 
 
 
 
 
-
-  const bratthet = L.tileLayer.wms(
+  const depth = L.tileLayer.wms(
     " https://wms.geonorge.no/skwms1/wms.dybdedata2?",
     {
       layers: "Dybdelag",
@@ -76,13 +65,13 @@ onMounted(async () => {
       attribution: '&copy; <a href="https://www.kartverket.no/">Kartverket</a>',
     }
   );
-  var baseMaps = {
-    openstreet:openstreet
+  // var baseMaps = {
+  //   openstreet:openstreet
  
-  };
+  // };
 
   var overlay = {
-    sjøkart:norgeskart
+    depth:depth
     
   };
   mymap = L.map("mapid", {
@@ -93,7 +82,7 @@ onMounted(async () => {
   mymap.setView([store.position.latitude, store.position.longitude], 13);
   setMapPosition(store.position);
 
-  var layerControl = L.control.layers(baseMaps).addTo(mymap);
+  var layerControl = L.control.layers(undefined,undefined).addTo(mymap);
 
 
 

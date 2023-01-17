@@ -6,7 +6,9 @@ export const usePositionStore = defineStore({
     position: { latitude: 0, longitude: 0 },
     newPosition:{ latitude: 0, longitude: 0 },
     place: "",
-    placeNumber:0
+    newPlace:"",
+    placeNumber:0,
+    newPlaceNumber:0
   }),
   getters: {},
   actions: {

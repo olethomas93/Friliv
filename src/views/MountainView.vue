@@ -6,13 +6,8 @@ import { onMounted, ref } from "vue";
 
 const cabin = ref()
 const drawerRight = ref(false);
-const onSwiper = (swiper: any) => {
-  console.log(swiper);
-};
 const drawer = (data:any) => {
   cabin.value = data.data
-  console.log(data)
-  console.log(cabin.value)
   drawerRight.value = true
 };
 
@@ -54,19 +49,57 @@ onMounted(() => {
         side="right"
         class="bg-grey-3"
       >
-      <q-btn absolute-top-left round color="primary" icon="close" @click="closeDrawer" />
         <q-scroll-area class="fit">
           <q-card
           v-if="cabin"
        class="my-card text-dark"
      >
-     <q-img :src="cabin.ntb_getCabin.pictureLegacyUrl" alt="no image"/>
+     <div class="text-h6">{{cabin.ntb_getCabin.name}}</div>
+     <q-img v-if="cabin.ntb_getCabin.pictureLegacyUrl" spinner-color="blue" :src="cabin.ntb_getCabin.pictureLegacyUrl" alt="no image" />
+     <q-icon v-else name="cabin" size="10em"/>
        <q-card-section>
-        <b>{{cabin.ntb_getCabin.name}}</b>
+        
+        <div style="display: flex; flex-direction: row; align-items: center;justify-content: space-evenly;">
+          <div>
+          <q-icon name="bed" size="md"></q-icon>
+          {{ cabin.ntb_getCabin.bedsNoService}}
+        </div>
+        <div v-if="cabin.ntb_getCabin.dntCabin">
+        DNT
+        </div>
+        <div v-else>
+          {{ cabin.ntb_getCabin.owner.name }}
+        </div>
+        <div v-if="cabin.ntb_getCabin.openingHours[0].key">
+        <div v-if="cabin.ntb_getCabin.openingHours[0].key =='unlocked'">
+        <q-icon size="md" name="key_off"></q-icon>
+        </div>
+        <div v-else-if="cabin.ntb_getCabin.openingHours[0].key =='dnt-key' || 'special key'">
+        <q-icon size="md" name="key"></q-icon>
+        </div>
+        </div>
+        <div v-if="cabin.ntb_getCabin.openingHours[0].serviceLevel">
+        <div v-if="cabin.ntb_getCabin.openingHours[0].serviceLevel =='emergency shelter'">Nødbu</div>
+        <div v-if="cabin.ntb_getCabin.openingHours[0].serviceLevel =='no-service (no beds)'">Dagshytte</div>
+        </div>
+        </div>
+
+
        </q-card-section>
      
      </q-card>
         </q-scroll-area>
+
+        <div class="q-mini-drawer-hide absolute" style="top: 50%; left: -5%">
+          <q-btn
+            dense
+            round
+            unelevated
+            color="secondary"
+            icon="chevron_right"
+            @click="closeDrawer"
+          />
+        </div>
       </q-drawer>
 
  </div>
