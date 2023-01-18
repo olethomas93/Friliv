@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { usePositionStore } from "@/stores/position";
+//@ts-ignore
+import {MarkerClusterGroup} from "leaflet.markercluster";
+import "leaflet.markercluster/dist/MarkerCluster.Default.css"; 
 
 import L from "leaflet";
 
@@ -9,7 +12,9 @@ let mymap: L.Map;
 const emit =defineEmits(['drawer:cabin'])
 const store = usePositionStore();
 const Cabins: L.Layer[] | undefined = [];
+var Regobs: L.Layer[] | undefined = [];
 const drawer = ref(false)
+const regObsLayer =ref()
 onUnmounted(() => {
   mymap.remove();
 });
@@ -173,7 +178,76 @@ onMounted(async () => {
   store.$subscribe((mutation, state) => {
     setMapPosition(state.newPosition);
   });
+
+  regObsLayer.value = L.markerClusterGroup({}) 
+  layerControl.addOverlay(regObsLayer.value, "Regobs").addTo(mymap);
+
+mymap.on('moveend',async (data)=>{
+
+regObsLayer.value.clearLayers()
+let bounds = data.target.getBounds()
+
+let bottomRight = bounds._northEast
+let topLeft = bounds._southWest
+console.log(topLeft)
+var myHeaders = new Headers();
+let date = new Date()
+date.setDate(date.getDate() -3)
+let newDate = date.toISOString()
+console.log(newDate)
+
+      myHeaders.append("Content-Type", "application/json");
+      var raw = JSON.stringify({
+        Extent:{TopLeft:{Latitude:topLeft.lat,Longitude:topLeft.lng},BottomRight:{Latitude:bottomRight.lat,Longitude:bottomRight.lng}},
+        LangKey:1,
+        SelectedGeoHazards:[10],
+        FromDtObsTime:newDate
+
+      });
+
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+      };
+
+      
+
+
+let obs = await (
+        await fetch("https://api.regobs.no/v5/Search/AtAGlance", requestOptions)
+      ).json();
+
+for(let item  of obs){
+
+  
+  var circle = L.marker([item.Latitude, item.Longitude]);
+
+    regObsLayer.value.addLayer(circle)
+}
+
+
+
+
+ 
+
+ 
+
+
+
+
+ 
+
+
+
+
+
+
+})
 });
+
+
+
 
 const setMapPosition = (pos: any) => {
   L
