@@ -9,7 +9,7 @@ import L from "leaflet";
 
 import { onMounted, onUnmounted, ref } from "vue";
 let mymap: L.Map;
-const emit =defineEmits(['drawer:cabin'])
+const emit =defineEmits(['drawer:cabin','drawer:regObs'])
 const store = usePositionStore();
 const Cabins: L.Layer[] | undefined = [];
 var Regobs: L.Layer[] | undefined = [];
@@ -189,12 +189,10 @@ let bounds = data.target.getBounds()
 
 let bottomRight = bounds._northEast
 let topLeft = bounds._southWest
-console.log(topLeft)
 var myHeaders = new Headers();
 let date = new Date()
 date.setDate(date.getDate() -3)
 let newDate = date.toISOString()
-console.log(newDate)
 
       myHeaders.append("Content-Type", "application/json");
       var raw = JSON.stringify({
@@ -222,6 +220,16 @@ for(let item  of obs){
 
   
   var circle = L.marker([item.Latitude, item.Longitude]);
+
+  circle.addEventListener('click',async (e)=>{
+    let obs = await (
+        await fetch(`https://api.regobs.no/v5/Registration/${item.RegId}/1`)
+      ).json();
+
+
+      emit('drawer:regObs', obs)
+
+  })
 
     regObsLayer.value.addLayer(circle)
 }

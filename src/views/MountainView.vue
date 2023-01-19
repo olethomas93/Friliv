@@ -5,20 +5,36 @@ import "swiper/css";
 import { onMounted, ref } from "vue";
 
 const cabin = ref()
+const regObs = ref()
 const drawerRight = ref(false);
-const drawer = (data:any) => {
+const drawerCabin = (data:any) => {
+  regObs.value = undefined
   cabin.value = data.data
   drawerRight.value = true
 };
 
-
+const drawerRegObs = (data:any) => {
+  cabin.value = undefined
+  console.log(data)
+  regObs.value = data
+  drawerRight.value = true
+};
 const closeDrawer =() =>{
 
 drawerRight.value=false
 
 }
 
+const toDateString =(date:string)=>{
 
+  var parse =new Date(date)
+
+  return parse.toLocaleDateString()
+
+
+
+
+}
 
 onMounted(() => {
  
@@ -36,7 +52,7 @@ onMounted(() => {
 
   <router-view v-slot="{ Component } ">
  <transition name="slide-fade" >
-        <component :is="Component" @drawer:cabin="drawer" />
+        <component :is="Component" @drawer:cabin="drawerCabin" @drawer:regObs="drawerRegObs" />
       </transition>
   </router-view>
   
@@ -88,6 +104,41 @@ onMounted(() => {
        </q-card-section>
      
      </q-card>
+
+     <q-card v-if="regObs" class="my-card text-dark">
+      <div class="text-h6">{{regObs.ObsLocation.Title}}</div>
+
+      <q-card-section>
+        <div style="display: flex; flex-direction: row; align-items: center;justify-content: space-around;">
+          <div style="display: flex; flex-direction: column; align-items: flex-start;justify-content: space-evenly;">
+            <div>
+          <q-icon name="event" size="md"></q-icon>
+          {{toDateString(regObs.DtObsTime) }}
+        </div>
+        <div>
+          <q-icon name="ac_unit" size="md"></q-icon>
+          {{ regObs.GeoHazardName}}
+        </div>
+      </div>
+
+
+          <div style="display: flex; flex-direction: column;align-items: flex-start;justify-content: space-evenly;">
+            <div>
+          <q-icon name="landscape" size="md"></q-icon>
+          {{regObs.ObsLocation.Height }}
+        </div>
+        <div>
+          <q-icon name="person" size="md"></q-icon>
+          {{regObs.Observer.NickName }}
+        </div>
+        </div>
+
+
+        </div>
+      </q-card-section>
+    
+    
+    </q-card>
         </q-scroll-area>
 
         <div class="q-mini-drawer-hide absolute" style="top: 50%; left: -5%">
