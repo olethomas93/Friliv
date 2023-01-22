@@ -3,8 +3,9 @@ import router from "@/router";
 import "swiper/css";
 
 import { onMounted, ref } from "vue";
-
+const slide = ref(1)
 const cabin = ref()
+const fullscreen =ref(false)
 const regObs = ref()
 const drawerRight = ref(false);
 const drawerCabin = (data:any) => {
@@ -58,7 +59,7 @@ onMounted(() => {
   
   <q-drawer
         v-model="drawerRight"
-        :width="300"
+        :width="500"
         :breakpoint="500"
         overlay
         bordered
@@ -125,7 +126,7 @@ onMounted(() => {
           <div style="display: flex; flex-direction: column;align-items: flex-start;justify-content: space-evenly;">
             <div>
           <q-icon name="landscape" size="md"></q-icon>
-          {{regObs.ObsLocation.Height }}
+          {{regObs.ObsLocation.Height }} moh
         </div>
         <div>
           <q-icon name="person" size="md"></q-icon>
@@ -135,8 +136,61 @@ onMounted(() => {
 
 
         </div>
-      </q-card-section>
+        <q-carousel
+      animated
+      v-model="slide"
+      arrows
+      v-model:fullscreen="fullscreen"
+      infinite
+      v-if="regObs.Attachments.length> 0"
+    >
+    <template v-for="(image,i) in regObs.Attachments" >
     
+    
+    
+      
+      <q-carousel-slide :name="i+1" :img-src="image.Url" />
+    </template>
+    <template v-slot:control>
+        <q-carousel-control
+          position="bottom-right"
+          :offset="[18, 18]"
+        >
+          <q-btn
+            push round dense color="white" text-color="primary"
+            :icon="fullscreen ? 'fullscreen_exit' : 'fullscreen'"
+            @click="fullscreen = !fullscreen"
+          />
+        </q-carousel-control>
+      </template>
+    
+    </q-carousel>
+
+    <div class="text-h6">Faretegn</div>
+    <div v-for="danger in regObs.DangerObs">
+      <div class="text-overline">{{ danger.DangerSignName }}</div>
+      {{ danger.Comment }}
+    </div>
+
+    <div v-if="regObs.SnowSurfaceObservation">
+    <div class="text-h6">Snødekke</div>
+    <div >{{ regObs.SnowSurfaceObservation.SnowDepth *100 }} cm</div>
+    <div >{{ regObs.SnowSurfaceObservation.SnowDriftName}}</div>
+    <div >{{ regObs.SnowSurfaceObservation.SnowSurfaceName}}</div>
+    <div >{{ regObs.SnowSurfaceObservation.SkiConditionsName}}</div>
+    <div >{{ regObs.SnowSurfaceObservation.Comment }}</div>
+  </div>
+    
+    <div v-if="regObs.AvalancheEvaluation3">
+    <div  class="text-h6">Skredfarevurdering</div>
+    <div>{{ regObs.AvalancheEvaluation3.AvalancheEvaluation }}</div>
+    <div>{{ regObs.AvalancheEvaluation3.AvalancheDevelopment }}</div>
+  </div>
+    <div v-if="regObs.GeneralObservation">
+    <div class="text-h6">Notater</div>
+    <div >{{ regObs.GeneralObservation.ObsComment }}</div>
+  </div>
+      </q-card-section>
     
     </q-card>
         </q-scroll-area>
