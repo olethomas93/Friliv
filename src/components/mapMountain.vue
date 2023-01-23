@@ -219,7 +219,7 @@ let obs = await (
 for(let item  of obs){
 
   
-  var circle = L.marker([item.Latitude, item.Longitude]);
+  var circle = L.marker([item.Latitude, item.Longitude],{});
 
   circle.addEventListener('click',async (e)=>{
     let obs = await (

@@ -9,8 +9,8 @@ const updateSW = registerSW({
 
   onNeedRefresh() {
     $q.dialog({
-      title: 'Refresh page?',
-      message: 'New content'
+      title: 'Ny version tilgjengelig ',
+      message: 'For å laste inn ny version trykk OK  ** Ole Thomas'
     }).onOk(() => {
       updateSW()
       // console.log('OK')

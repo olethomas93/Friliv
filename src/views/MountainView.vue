@@ -59,9 +59,10 @@ onMounted(() => {
   
   <q-drawer
         v-model="drawerRight"
-        :width="500"
+        
         :breakpoint="500"
         overlay
+        behavior="mobile"
         bordered
         side="right"
         class="bg-grey-3"

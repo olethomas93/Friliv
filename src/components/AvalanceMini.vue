@@ -3,7 +3,7 @@ import { onMounted, ref, computed, reactive } from "vue";
 import { usePositionStore } from "@/stores/position";
 import router from "@/router";
 const VARSOM_URL =
-  "https://api01.nve.no/hydrology/forecast/avalanche/v6.0.1/api/AvalancheWarningByCoordinates/Detail/";
+  "https://api01.nve.no/hydrology/forecast/avalanche/v6.2.1/api/AvalancheWarningByCoordinates/Detail/";
 
 const avalanceData = ref();
 const location = ref();
