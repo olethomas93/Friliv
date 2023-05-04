@@ -29,17 +29,41 @@ const fetchData = async (pos: any) => {
 </script>
 
 <template>
-  <q-card class="cards avalance" :ripple="true" @click="router.push('/mountain/skred2')">
-    <q-card-section v-if="avalanceData">
-      <div class="text-h6 text-white">Skredvarsling</div>
-      <div class="text-subtitle1 text-dark">{{ avalanceData[0].RegionName }}</div>
-      <div :class="'color' + avalanceData[0].DangerLevel" class="badge text-dark text-subtitle2">
+  <div v-if="avalanceData">
+  <q-card style="cursor: pointer;" class="cards avalance" :class="'color' + avalanceData[0].DangerLevel" :ripple="true" @click="router.push('/mountain/skred2')">
+    <div class="row"  style="height: 100%;" >
+      <div class="col-4 col-md-6" style="width:25%;display: flex; flex-direction: column; align-items: center;">
+        <img :src="'varsom/level-'+avalanceData[0].DangerLevel+'.svg'" style="width: 100% " />
+        <div class=" text-white" style="width: 50%;font-size: 5rem;">
         {{ avalanceData[0].DangerLevel }}
       </div>
+      </div>
+      <div class="col-4" style="width:70%;display: flex; flex-direction: column;justify-content: center;">
+        <!-- <div class="text-h6 text-white">Skredvarsling</div> -->
+      
+      <div class="text-h6 text-white text-weight-bold">{{ avalanceData[0].RegionName }}</div>
+     
 
-      <div class="text-subtitle1 text-weight-regular" style="font-size: 1em;">{{ avalanceData[0].MainText }}</div>
+      <div class="text-subtitle1 text-white text-weight-regular" style="font-size: 1em;">{{ avalanceData[0].MainText }}</div>
+
+
+
+</div>
+</div>
+   
+  </q-card>
+</div>
+<div v-else>
+  <q-card class="cards avalance">
+    <q-card-section >
+      <q-spinner-oval
+          color="primary"
+          size="8em"
+          
+        />
     </q-card-section>
   </q-card>
+</div>
 </template>
 
 <style scoped>
@@ -51,22 +75,22 @@ const fetchData = async (pos: any) => {
 
 }
 .color2 {
-  background-color: #eed202;
+  background-color: #facb04;
 }
 .color1 {
-  background-color: green;
+  background-color: #7db000;
 }
 .color {
   background-color: grey;
 }
 
 .color3 {
-  background-color: red;
+  background-color: #e96100;
+}
+.color4 {
+  background-color: #d80e00;
 }
 .avalance{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #d4c1a9 !important;
+ 
 }
 </style>

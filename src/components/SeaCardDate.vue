@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { usePositionStore } from "@/stores/position";
 import { onMounted, ref } from "vue";
-import { Line } from "vue-chartjs";
-import LineChart from "./LineChart.vue";
 import router from "@/router";
 const API_URL = "https://www.kartverket.no/api/vsl/tideforecast";
 const TIDE_LEVEL = "https://www.kartverket.no/api/vsl/tideLevels";
@@ -24,7 +22,7 @@ const fetchData = async (pos: any) => {
   const url1 = `${API_URL}?latitude=${pos.latitude}&longitude=${pos.longitude}&place=&language=nb`;
   const url2 = `${TIDE_LEVEL}?latitude=${pos.latitude}&longitude=${pos.longitude}&place=&language=nb`;
   tideForecast.value = await (await fetch(url1)).json();
-  let tideData = await (await fetch(url2)).json();
+  const tideData = await (await fetch(url2)).json();
 
   parseTideData(tideData);
 
@@ -56,7 +54,7 @@ const handleTime = (dataD: Date) => {
 </script>
 
 <template>
-  <q-card class="cards shadow-8" @click="router.push('/sea/tide')">
+  <q-card class="cards shadow-8" @click="router.push('/sea/tide') " style="cursor: pointer;">
     <q-card-section>
       <div class="text-h6 text-white">Vannstand nå</div>
 

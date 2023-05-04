@@ -85,10 +85,10 @@ onMounted(() => {
         <div v-if="cabin.ntb_getCabin.dntCabin">
         DNT
         </div>
-        <div v-else>
+        <div v-else-if="cabin.ntb_getCabin.owner">
           {{ cabin.ntb_getCabin.owner.name }}
         </div>
-        <div v-if="cabin.ntb_getCabin.openingHours[0].key">
+        <div v-if="cabin.ntb_getCabin.openingHours">
         <div v-if="cabin.ntb_getCabin.openingHours[0].key =='unlocked'">
         <q-icon size="md" name="key_off"></q-icon>
         </div>
@@ -96,7 +96,7 @@ onMounted(() => {
         <q-icon size="md" name="key"></q-icon>
         </div>
         </div>
-        <div v-if="cabin.ntb_getCabin.openingHours[0].serviceLevel">
+        <div v-if="cabin.ntb_getCabin.openingHours">
         <div v-if="cabin.ntb_getCabin.openingHours[0].serviceLevel =='emergency shelter'">Nødbu</div>
         <div v-if="cabin.ntb_getCabin.openingHours[0].serviceLevel =='no-service (no beds)'">Dagshytte</div>
         </div>

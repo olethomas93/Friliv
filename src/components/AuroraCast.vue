@@ -12,7 +12,6 @@ onMounted(async () => {
 
   auroraData.value = await(await fetch(`https://www.windy.northei.no/aurora/forecast?placenumber=${store.placeNumber}`)).json()
 
-console.log(auroraData.value)
     
 })
 
@@ -25,7 +24,7 @@ console.log(auroraData.value)
 class="cards aurora"
   >
   <div v-if="auroraData">
-  <div :class="{auroraAni:auroraData.shortIntervals[0].kpIndex >3,normal:auroraData.shortIntervals[0].kpIndex <=3}"></div>
+  <div  v-if="auroraData" :class="{auroraAni:auroraData.shortIntervals[0].kpIndex >3,normal:auroraData.shortIntervals[0].kpIndex <=3}"></div>
 
 </div>
     <q-card-section class="testing">

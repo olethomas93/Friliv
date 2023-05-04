@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
 import { usePositionStore } from "@/stores/position";
+import {useActualPositionStore} from '@/stores/actualPositon'
 import { onMounted, ref,onBeforeMount } from "vue";
 import SearchButton from "./components/SearchButton.vue";
 import PlaceShow from "./components/PlaceShow.vue";
@@ -9,6 +10,8 @@ import L from "leaflet";
 import ReloadPWA from "./components/ReloadPWA.vue";
 
 const store = usePositionStore();
+const store2 = useActualPositionStore();
+
 const $q = useQuasar();
 
 const tab = ref("");
@@ -37,7 +40,7 @@ onBeforeMount(async ()=>{
   }else{
 
     await store.locateMe();
-
+    await store2.wathPosition()
 await store.getPlace();
   }
 
@@ -64,7 +67,7 @@ onMounted(async () => {
   }else{
 
     await store.locateMe();
-
+    await store2.wathPosition()
 await store.getPlace();
   }
   
@@ -217,7 +220,23 @@ const handlePermission = () => {
 
         </q-expansion-item>
 
+        <q-expansion-item
+        active-class="myactiveclass"
+        icon="timeline"
+        label="Statistic"
+        header-class="icon-green"
+        expand-icon="none"
+      >
+    
+      <q-item active-class="myactiveclass" :to="{name:'magasin'}" class="icon-exp" exact>
+            <!-- <q-item-section avatar>
+              <q-icon name="landscape" color="" />
+            </q-item-section> -->
 
+            <q-item-section class=""> Vannmagasiner </q-item-section>
+          </q-item>
+    
+    </q-expansion-item>
         </q-list>
       </q-scroll-area>
     </q-drawer>

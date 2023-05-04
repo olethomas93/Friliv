@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { usePositionStore } from "@/stores/position";
+import {useActualPositionStore} from '@/stores/actualPositon'
+
 //@ts-ignore
 import {MarkerClusterGroup} from "leaflet.markercluster";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css"; 
@@ -11,10 +13,15 @@ import { onMounted, onUnmounted, ref } from "vue";
 let mymap: L.Map;
 const emit =defineEmits(['drawer:cabin','drawer:regObs'])
 const store = usePositionStore();
+const store2 = useActualPositionStore();
 const Cabins: L.Layer[] | undefined = [];
 var Regobs: L.Layer[] | undefined = [];
+var layerControl:any = ref()
 const drawer = ref(false)
 const regObsLayer =ref()
+const current_position :any = ref()
+ const current_accuracy:any = ref()
+ const circlepos:any = ref()
 onUnmounted(() => {
   mymap.remove();
 });
@@ -97,9 +104,10 @@ onMounted(async () => {
   mymap.addLayer(norgeskart)
 
   mymap.setView([store.position.latitude, store.position.longitude], 13);
-  setMapPosition(store.position);
+  // setMapPosition(store.position);
+  setMapActualPosition(store2.actualPosition)
 
-  var layerControl = L.control.layers(baseMaps, overlay).addTo(mymap);
+  layerControl = L.control.layers(baseMaps, overlay).addTo(mymap);
 
 
 
@@ -176,11 +184,16 @@ onMounted(async () => {
   layerControl.addOverlay(cabinsLayer, "Hytter").addTo(mymap);
 
   store.$subscribe((mutation, state) => {
-    setMapPosition(state.newPosition);
+    setMapPosition(state.position);
+  });
+  
+  store2.$subscribe((mutation, state) => {
+    setMapActualPosition(state.actualPosition);
   });
 
   regObsLayer.value = L.markerClusterGroup({}) 
   layerControl.addOverlay(regObsLayer.value, "Regobs").addTo(mymap);
+  
 
 mymap.on('moveend',async (data)=>{
 
@@ -232,42 +245,60 @@ for(let item  of obs){
   })
 
     regObsLayer.value.addLayer(circle)
+  
 }
-
-
-
-
- 
-
- 
-
-
-
-
- 
-
-
-
-
-
 
 })
 });
 
 
+const changeLayer =()=>{
+const control = layerControl
 
+
+const inputs = control._layers
+console.log(inputs[1])
+console.log(inputs)
+mymap[true ? "addLayer" : "removeLayer"](inputs[1].layer)
+
+
+
+}
 
 const setMapPosition = (pos: any) => {
   L
     .marker([pos.latitude, pos.longitude])
     .addTo(mymap)
-    .bindPopup("Du er her")
+    .bindPopup("Kjøh")
     .openPopup();
 
   let test = L.latLng(pos.latitude, pos.longitude);
 
   mymap.flyTo(test, 10);
 };
+const setMapActualPosition = (pos: any) => {
+  if (current_position.value) {
+        mymap.removeLayer(current_position.value);
+        mymap.removeLayer(current_accuracy.value);
+        mymap.removeLayer(circlepos.value);
+    }
+    var radius = pos.accuracy / 2;
+    var posRadius = radius/2;
+    if (posRadius > 100){
+
+posRadius =100;
+
+}
+let test = L.latLng(pos.latitude, pos.longitude);
+  circlepos.value = L.circle(test,{radius:posRadius+1,color:"white",fillOpacity:0,fill:false}).addTo(mymap)
+
+  current_accuracy.value = L.circle(test,{radius:radius,color:"white",fillColor:"white",stroke:false,fillOpacity:0.7}).addTo(mymap)
+  current_position.value = L.circle(test,{radius:posRadius,color:"#1E90FF",fillColor:"#1E90FF",fillOpacity:1}).addTo(mymap).bindPopup("Du er her!");
+  
+
+  mymap.flyTo(test, 10);
+};
+
 
 
 const showInfo = (cabin: any) => {};
@@ -277,7 +308,10 @@ const showInfo = (cabin: any) => {};
  
  <div class="grid">
     <div class="col">
-      <div id="mapid"></div>
+      <div id="mapid">
+        <q-btn style="z-index: 9999999; position: absolute; background-color: white;" @click="changeLayer">Dette er en knapp</q-btn>
+
+      </div>
     </div>
   </div>
 </template>

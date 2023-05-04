@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { usePositionStore } from "@/stores/position";
 import { onMounted, ref } from "vue";
-import { Line } from "vue-chartjs";
-import LineChart from "./LineChart.vue";
 
 const API_URL = "https://www.kartverket.no/api/vsl/tideforecast";
 const TIDE_LEVEL = "https://www.kartverket.no/api/vsl/tideLevels";

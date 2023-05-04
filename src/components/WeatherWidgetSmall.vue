@@ -25,8 +25,6 @@ const fetchData = async (pos: any) => {
 
    weatherData.value = (await (await fetch(url1)).json())
 
-  console.log(weatherData.value)
-
   //parseWeatherData(WeatherForecast.value);
 
   return true;
@@ -166,6 +164,7 @@ const handleTimeNumber = (dataD: Date) => {
     v-if="weatherData"
     class="cards weathercard"
     @click="router.push('/weather')"
+    style="cursor: pointer;"
   >
     <q-card-section>
       <div class="text-h6 text-white">Været nå</div>

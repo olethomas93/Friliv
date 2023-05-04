@@ -17,6 +17,8 @@ import SeaTidecardVue from "@/components/SeaTidecard.vue";
 import OfflineMapVue from "@/components/OfflineMap.vue";
 import mapMountain from "@/components/mapMountain.vue"
 import mapSea from "@/components/mapSea.vue"
+import riverSalmonVue from "@/components/riverSalmon.vue";
+import statisticViewVue from "@/views/statistic.View.vue";
 const routes: Array<any> = [
   {
     path: "/",
@@ -40,6 +42,11 @@ const routes: Array<any> = [
         name:"hugg",
         path:"hugg",
         component:HuggTabelVue
+      },
+      {
+        name:"laksebors",
+        path:"bors",
+        component:riverSalmonVue
       },
       {
         name:"seamap",
@@ -90,6 +97,11 @@ component:mapMountain}
     
     component: MapViewVue,
   },
+  {
+    path:"/magasin",
+    name:"magasin",
+    component:statisticViewVue
+  }
 ];
 
 const router = createRouter({
